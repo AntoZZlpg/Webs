@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroType - Prueba de Mecanografía Frutiger Aero</title>
+    <!-- Tailwind CSS for utility layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap');
+
+        :root {
+            --aero-blue: #0078d7;
+            --aero-cyan: #00d2ff;
+            --aero-green: #38ef7d;
+            --aero-glass-bg: rgba(255, 255, 255, 0.35);
+            --aero-glass-border: rgba(255, 255, 255, 0.7);
+            --aero-shadow: 0 20px 40px rgba(0, 30, 60, 0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #0a3d70 0%, #1168ab 25%, #008f9c 55%, #108e82 80%, #32da70 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
+        }
+
+        /* Animated Aurora Rays */
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .aurora-ray {
+            position: absolute;
+            filter: blur(60px);
+            opacity: 0.65;
+            border-radius: 50%;
+            animation: float 18s ease-in-out infinite alternate;
+        }
+
+        .ray-1 {
+            top: -10%;
+            left: 10%;
+            width: 55vw;
+            height: 55vw;
+            background: radial-gradient(circle, rgba(0, 210, 255, 0.85) 0%, rgba(255,255,255,0) 70%);
+            animation-duration: 14s;
+        }
+
+        .ray-2 {
+            bottom: -20%;
+            right: 5%;
+            width: 65vw;
+            height: 65vw;
+            background: radial-gradient(circle, rgba(56, 239, 125, 0.75) 0%, rgba(255,255,255,0) 70%);
+            animation-duration: 20s;
+        }
+
+        .ray-3 {
+            top: 35%;
+            left: 30%;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255,255,255,0) 70%);
+            animation-duration: 16s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(40px, -30px) scale(1.1) rotate(10deg); }
+            100% { transform: translate(-30px, 50px) scale(0.95) rotate(-10deg); }
+        }
+
+        /* Floating Animated Frutiger Aero Icons & Elements Layer */
+        .aero-icon-element {
+            position: absolute;
+            pointer-events: none;
+            will-change: transform, opacity;
+            filter: drop-shadow(0 10px 15px rgba(0, 40, 80, 0.25));
+        }
+
+        /* Frutiger Aero Goldfish Swim Animation (Windows Vista Mascot) */
+        .aero-fish {
+            animation: swimAcross 22s linear infinite, fishWiggle 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes swimAcross {
+            0% { transform: translate(-150px, 60vh) scale(0.85) rotate(-5deg); opacity: 0; }
+            10% { opacity: 0.9; }
+            50% { transform: translate(50vw, 30vh) scale(1.05) rotate(4deg); }
+            90% { opacity: 0.9; }
+            100% { transform: translate(105vw, 15vh) scale(0.9) rotate(-3deg); opacity: 0; }
+        }
+
+        @keyframes fishWiggle {
+            0% { transform: translateY(0px) rotate(-3deg); }
+            100% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        /* Eco Leaves Floating in Wind Animation */
+        .aero-leaf {
+            animation: leafFloat 16s ease-in-out infinite;
+        }
+
+        @keyframes leafFloat {
+            0% { transform: translateY(105vh) translateX(0) rotate(0deg) scale(0.7); opacity: 0; }
+            15% { opacity: 0.85; }
+            50% { transform: translateY(50vh) translateX(60px) rotate(180deg) scale(1); }
+            85% { opacity: 0.85; }
+            100% { transform: translateY(-10vh) translateX(-40px) rotate(360deg) scale(0.8); opacity: 0; }
+        }
+
+        /* Floating Glass Sphere / Orb Animation */
+        .aero-orb {
+            animation: orbBounce 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbBounce {
+            0% { transform: translateY(0px) scale(1) rotate(0deg); }
+            50% { transform: translateY(-40px) scale(1.08) rotate(120deg); }
+            100% { transform: translateY(20px) scale(0.95) rotate(240deg); }
+        }
+
+        /* Frutiger Aero Sparkles Glow */
+        .aero-sparkle {
+            animation: sparklePulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes sparklePulse {
+            0% { transform: scale(0.6) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.2) rotate(45deg); opacity: 0.95; filter: drop-shadow(0 0 10px #00d2ff); }
+            100% { transform: scale(0.7) rotate(90deg); opacity: 0.4; }
+        }
+
+        /* Water Bubbles */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.25) 40%, rgba(0, 150, 255, 0.15) 70%, rgba(255, 255, 255, 0.7) 100%);
+            box-shadow: inset -2px -2px 6px rgba(0, 0, 0, 0.15), inset 2px 2px 6px rgba(255, 255, 255, 0.8), 0 8px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(2px);
+            animation: rise 12s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(105vh) scale(0.6); opacity: 0; }
+            10% { opacity: 0.85; }
+            90% { opacity: 0.85; }
+            100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+        }
+
+        /* Glassmorphism Vista Aero Card */
+        .aero-window {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.48) 0%, rgba(210, 240, 255, 0.3) 100%);
+            backdrop-filter: blur(22px) saturate(200%);
+            -webkit-backdrop-filter: blur(22px) saturate(200%);
+            border: 1px solid var(--aero-glass-border);
+            border-radius: 14px;
+            box-shadow: var(--aero-shadow), inset 0 1px 2px rgba(255, 255, 255, 0.95), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Glass Shine Reflection Overlay */
+        .aero-window::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 45%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.05) 100%);
+            pointer-events: none;
+            border-top-left-radius: 13px;
+            border-top-right-radius: 13px;
+        }
+
+        /* Aero Window Titlebar */
+        .aero-titlebar {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, rgba(200, 230, 255, 0.4) 50%, rgba(255, 255, 255, 0.6) 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Vista Glossy Buttons */
+        .aero-btn {
+            position: relative;
+            background: linear-gradient(180deg, #ffffff 0%, #dceeff 45%, #b2d6f5 50%, #cce5ff 100%);
+            border: 1px solid #4a82b8;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-weight: 600;
+            color: #0b3c5d;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 2px 5px rgba(0, 30, 60, 0.2);
+            transition: all 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+            cursor: pointer;
+            outline: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .aero-btn:hover {
+            background: linear-gradient(180deg, #ffffff 0%, #e8f4ff 45%, #c5e3ff 50%, #dbefff 100%);
+            border-color: #2b6cb0;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 0 12px rgba(0, 162, 255, 0.6), 0 2px 6px rgba(0, 0, 0, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .aero-btn:active {
+            background: linear-gradient(180deg, #99c2ec 0%, #bcd9f8 50%, #d1e5fb 100%);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            transform: translateY(1px);
+        }
+
+        .aero-btn-active {
+            background: linear-gradient(180deg, #38ef7d 0%, #11998e 100%) !important;
+            color: #ffffff !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4) !important;
+            border-color: #0d736a !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 0 10px rgba(56, 239, 125, 0.6) !important;
+        }
+
+        /* Aero Pill Selectors/Badges */
+        .aero-badge {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, rgba(220, 240, 255, 0.45) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), 0 2px 4px rgba(0,0,0,0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Typing Box Styling */
+        .typing-container {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: inset 0 2px 6px rgba(0, 20, 50, 0.15), 0 1px 0 rgba(255, 255, 255, 0.8);
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+
+        /* Typing Caret & Letter Highlights */
+        .char-correct {
+            color: #058240;
+            background-color: rgba(56, 239, 125, 0.3);
+            border-radius: 2px;
+            text-shadow: 0 0 5px rgba(56, 239, 125, 0.6);
+        }
+
+        .char-incorrect {
+            color: #d32f2f;
+            background-color: rgba(255, 82, 82, 0.35);
+            border-radius: 2px;
+            text-shadow: 0 0 5px rgba(255, 82, 82, 0.6);
+            animation: shake 0.2s ease-in-out;
+        }
+
+        .char-current {
+            position: relative;
+            background-color: rgba(0, 150, 255, 0.3);
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(0, 162, 255, 0.7);
+        }
+
+        .char-current::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #0078d7;
+            box-shadow: 0 0 6px #00d2ff;
+            animation: blinkCarets 0.8s infinite alternate;
+        }
+
+        @keyframes blinkCarets {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            75% { transform: translateX(3px); }
+        }
+
+        /* Glossy Meter Bar */
+        .meter-bg {
+            background: rgba(0, 0, 0, 0.18);
+            border-radius: 10px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .meter-fill {
+            height: 100%;
+            background: linear-gradient(180deg, #a8ff78 0%, #78ffd6 40%, #00b4db 100%);
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.8);
+            transition: width 0.3s ease-out;
+        }
+
+        /* Scrollbar custom Vista glass style */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 120, 215, 0.5);
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 120, 215, 0.8);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-3 sm:p-6 min-h-screen relative">
+
+    <!-- Background Animated Layer -->
+    <div class="aurora-bg">
+        <div class="aurora-ray ray-1"></div>
+        <div class="aurora-ray ray-2"></div>
+        <div class="aurora-ray ray-3"></div>
+
+        <!-- Dynamic Animated Frutiger Aero Icons Container -->
+        <div id="aero-icon-container" class="absolute inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+        <!-- Dynamic JS Bubbles generated here -->
+        <div id="bubble-container"></div>
+    </div>
+
+    <!-- Main Application Glass Window -->
+    <main class="aero-window w-full max-w-4xl z-10 my-auto shadow-2xl">
+        
+        <!-- Windows Vista Window Header -->
+        <div class="aero-titlebar">
+            <div class="flex items-center gap-2">
+                <!-- Glossy Water Drop Logo -->
+                <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-400 via-blue-500 to-white flex items-center justify-center shadow-md border border-white">
+                    <svg class="w-3.5 h-3.5 text-white drop-shadow" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a6 6 0 00-6 6c0 3.314 6 10 6 10s6-6.686 6-10a6 6 0 00-6-6z"/>
+                    </svg>
+                </div>
+                <span class="font-bold text-slate-800 text-sm tracking-wide drop-shadow-sm">AeroType 2006 &bull; Test de Mecanografía Frutiger Aero</span>
+            </div>
+
+            <!-- Vista Decorative Controls -->
+            <div class="flex items-center gap-1.5">
+                <button title="Sonido" id="sound-toggle-btn" onclick="toggleSound()" class="w-7 h-6 rounded bg-white/40 hover:bg-white/70 border border-white/60 flex items-center justify-center text-slate-700 transition">
+                    <span id="sound-icon">🔊</span>
+                </button>
+                <div class="w-3 h-3 rounded-full bg-yellow-400/80 border border-white/80 shadow-sm"></div>
+                <div class="w-3 h-3 rounded-full bg-green-400/80 border border-white/80 shadow-sm"></div>
+                <div class="w-3 h-3 rounded-full bg-red-500/80 border border-white/80 shadow-sm"></div>
+            </div>
+        </div>
+
+        <!-- Window Inner Content -->
+        <div class="p-4 sm:p-8 space-y-6 relative z-10">
+
+            <!-- Config Toolbar Bar -->
+            <div class="flex flex-wrap items-center justify-between gap-4 aero-badge p-3 sm:p-4">
+                
+                <!-- Dificultad -->
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Dificultad:</span>
+                    <div class="flex gap-1.5" id="difficulty-selector">
+                        <button onclick="setDifficulty('easy')" class="aero-btn text-xs px-3 py-1 aero-btn-active" id="btn-easy">Fácil</button>
+                        <button onclick="setDifficulty('medium')" class="aero-btn text-xs px-3 py-1" id="btn-medium">Medio</button>
+                        <button onclick="setDifficulty('hard')" class="aero-btn text-xs px-3 py-1" id="btn-hard">Difícil</button>
+                    </div>
+                </div>
+
+                <!-- Modo de Prueba -->
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Tiempo:</span>
+                    <div class="flex gap-1.5" id="time-selector">
+                        <button onclick="setTimeMode(15)" class="aero-btn text-xs px-3 py-1" id="btn-time-15">15s</button>
+                        <button onclick="setTimeMode(30)" class="aero-btn text-xs px-3 py-1 aero-btn-active" id="btn-time-30">30s</button>
+                        <button onclick="setTimeMode(60)" class="aero-btn text-xs px-3 py-1" id="btn-time-60">60s</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Metrics Live Panel -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                
+                <!-- WPM / PPM -->
+                <div class="aero-badge p-3 text-center flex flex-col items-center justify-center relative overflow-hidden">
+                    <span class="text-xs text-slate-600 font-semibold uppercase">PPM (WPM)</span>
+                    <span id="stat-wpm" class="text-3xl sm:text-4xl font-bold text-blue-900 drop-shadow-sm my-1">0</span>
+                    <span class="text-[10px] text-slate-500">Palabras / min</span>
+                </div>
+
+                <!-- Precisión -->
+                <div class="aero-badge p-3 text-center flex flex-col items-center justify-center">
+                    <span class="text-xs text-slate-600 font-semibold uppercase">Precisión</span>
+                    <span id="stat-accuracy" class="text-3xl sm:text-4xl font-bold text-teal-800 drop-shadow-sm my-1">100%</span>
+                    <span class="text-[10px] text-slate-500">Aciertos vs Errores</span>
+                </div>
+
+                <!-- Contador de Errores -->
+                <div class="aero-badge p-3 text-center flex flex-col items-center justify-center">
+                    <span class="text-xs text-slate-600 font-semibold uppercase">Errores</span>
+                    <span id="stat-errors" class="text-3xl sm:text-4xl font-bold text-rose-700 drop-shadow-sm my-1">0</span>
+                    <span class="text-[10px] text-slate-500">Teclas erróneas</span>
+                </div>
+
+                <!-- Tiempo Restante -->
+                <div class="aero-badge p-3 text-center flex flex-col items-center justify-center">
+                    <span class="text-xs text-slate-600 font-semibold uppercase">Tiempo</span>
+                    <span id="stat-time" class="text-3xl sm:text-4xl font-bold text-emerald-800 drop-shadow-sm my-1">30s</span>
+                    <!-- Progress Mini Bar -->
+                    <div class="w-full meter-bg h-2 mt-1">
+                        <div id="timer-progress" class="meter-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Main Interactive Text Box -->
+            <div class="relative">
+                <!-- Click overlay to ensure focus -->
+                <div id="typing-box" onclick="focusInput()" class="typing-container p-5 sm:p-7 min-h-[160px] text-lg sm:text-2xl leading-relaxed sm:leading-loose text-slate-800 break-words cursor-text select-none relative transition-all duration-200">
+                    <div id="text-display" class="relative z-10"></div>
+                    
+                    <!-- Prompt placeholder when ready -->
+                    <div id="click-prompt" class="absolute inset-0 flex items-center justify-center bg-white/30 backdrop-blur-[2px] rounded-lg transition-opacity duration-300 pointer-events-none">
+                        <span class="aero-btn text-sm px-4 py-2 shadow-lg">Haz clic aquí o pulsa cualquier tecla para empezar</span>
+                    </div>
+                </div>
+
+                <!-- Hidden actual text input field -->
+                <input type="text" id="hidden-input" class="absolute opacity-0 top-0 left-0 w-full h-full cursor-default" autocomplete="off" capitalize="none" spellcheck="false">
+            </div>
+
+            <!-- Controls & Restart Button -->
+            <div class="flex items-center justify-between pt-2">
+                <div class="text-xs text-slate-700 font-medium hidden sm:flex items-center gap-1">
+                    <kbd class="px-2 py-1 bg-white/70 border border-slate-300 rounded shadow-2xl text-slate-800 font-mono">Tab</kbd>
+                    <span>+</span>
+                    <kbd class="px-2 py-1 bg-white/70 border border-slate-300 rounded shadow-2xl text-slate-800 font-mono">Enter</kbd>
+                    <span class="ml-1">para reiniciar rápido</span>
+                </div>
+
+                <div class="flex gap-3 w-full sm:w-auto justify-end">
+                    <button onclick="resetTest()" class="aero-btn text-sm py-2 px-6 w-full sm:w-auto">
+                        <svg class="w-4 h-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        <span>Reiniciar Pruebas</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal Final Statistics Results Window -->
+    <div id="results-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="aero-window w-full max-w-lg transform scale-95 transition-transform duration-300" id="modal-card">
+            
+            <div class="aero-titlebar">
+                <span class="font-bold text-slate-800 text-sm">¡Prueba Finalizada! &bull; Informe Aero</span>
+                <button onclick="closeModal()" class="w-6 h-6 rounded bg-red-500/80 hover:bg-red-600 text-white font-bold text-xs flex items-center justify-center shadow">✕</button>
+            </div>
+
+            <div class="p-6 text-center space-y-6">
+                <!-- Celebration Icon -->
+                <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-emerald-400 via-cyan-300 to-white p-1 shadow-xl border-2 border-white">
+                    <div class="w-full h-full rounded-full bg-white/60 backdrop-blur flex items-center justify-center text-4xl">
+                        🏆
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800 drop-shadow-sm" id="result-title">¡Excelente Desempeño!</h2>
+                    <p class="text-sm text-slate-600 mt-1" id="result-subtitle">Has completado el test con estética Frutiger Aero.</p>
+                </div>
+
+                <!-- Final Stats Grid -->
+                <div class="grid grid-cols-2 gap-3 aero-badge p-4">
+                    <div class="text-center p-2">
+                        <span class="text-xs text-slate-500 font-semibold block">VELOCIDAD</span>
+                        <span id="modal-wpm" class="text-3xl font-extrabold text-blue-900">0</span>
+                        <span class="text-xs text-slate-600">PPM (WPM)</span>
+                    </div>
+
+                    <div class="text-center p-2">
+                        <span class="text-xs text-slate-500 font-semibold block">PRECISIÓN</span>
+                        <span id="modal-accuracy" class="text-3xl font-extrabold text-emerald-800">0%</span>
+                        <span class="text-xs text-slate-600">Aciertos</span>
+                    </div>
+
+                    <div class="text-center p-2 border-t border-white/60">
+                        <span class="text-xs text-slate-500 font-semibold block">CARACTERES/MIN</span>
+                        <span id="modal-cpm" class="text-xl font-bold text-slate-800">0</span>
+                        <span class="text-xs text-slate-600">CPM</span>
+                    </div>
+
+                    <div class="text-center p-2 border-t border-white/60">
+                        <span class="text-xs text-slate-500 font-semibold block">ERRORES TOTALES</span>
+                        <span id="modal-errors" class="text-xl font-bold text-rose-700">0</span>
+                        <span class="text-xs text-slate-600">Fallos</span>
+                    </div>
+                </div>
+
+                <!-- Modal Actions -->
+                <div class="flex justify-center gap-3 pt-2">
+                    <button onclick="copyResults()" class="aero-btn text-xs py-2 px-4">
+                        📋 Copiar Resultado
+                    </button>
+                    <button onclick="closeModal(); resetTest();" class="aero-btn text-xs py-2 px-6 aero-btn-active">
+                        🔄 Jugar de Nuevo
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Text Corpora in Spanish categorized by difficulty
+        const TEXT_CORPUS = {
+            easy: [
+                "el agua del rio fluye entre los arboles verdes bajo un cielo azul brillante",
+                "la brisa marina trae frescura y calidez en los dias soleados de verano",
+                "gotas de lluvia caen sobre el cristal dejando reflejos de luz pura",
+                "senderos de hierba fresca nos llevan hasta el valle lleno de flores suaves",
+                "el sol ilumina la ventana creando burbujas de colores en el aire"
+            ],
+            medium: [
+                "El sistema Frutiger Aero destaca por sus tonos brillantes, transparencias de cristal y naturaleza.",
+                "Durante la era de Windows Vista, las interfaces digitales buscaban transmitir frescura y tecnologia.",
+                "Escribir con fluidez y precision requiere practica constante, paciencia y postura adecuada.",
+                "Las burbujas de agua y los paisajes iluminados definieron la estetica visual de los anos dos mil.",
+                "Un buen mecanografo mantiene un ritmo constante sin mirar el teclado mientras digita frases."
+            ],
+            hard: [
+                "¡Windows Vista (2006) introdujo Aero Glass con DWM.exe, sombras suaves y 100% de brillo translucido!",
+                "El rendimiento (WPM = Palabras Por Minuto) se calcula: (caracteres_correctos / 5) / (tiempo_minutos).",
+                "En 2007, el diseño UI/UX utilizaba gradientes complejos: #0078D7, #38EF7D y efectos 'backdrop-filter'.",
+                "¿Sabias que teclear a mas de 80 PPM reduce el tiempo de redaccion en un 40% aproximadamente?",
+                "Sistemas operativos como Vista & Windows 7 revolucionaron los graficos con Direct3D v10.0!"
+            ]
+        };
+
+        // Game State Variables
+        let currentDifficulty = 'easy';
+        let currentTimeLimit = 30;
+        let targetText = "";
+        let timer = null;
+        let timeRemaining = 30;
+        let isTestRunning = false;
+        let isTestFinished = false;
+        
+        let typedHistory = "";
+        let totalTypedKeys = 0;
+        let totalErrors = 0;
+        let soundEnabled = true;
+
+        // DOM Element References
+        const hiddenInput = document.getElementById('hidden-input');
+        const textDisplay = document.getElementById('text-display');
+        const clickPrompt = document.getElementById('click-prompt');
+        const typingBox = document.getElementById('typing-box');
+        
+        const statWpm = document.getElementById('stat-wpm');
+        const statAccuracy = document.getElementById('stat-accuracy');
+        const statErrors = document.getElementById('stat-errors');
+        const statTime = document.getElementById('stat-time');
+        const timerProgress = document.getElementById('timer-progress');
+
+        // Synthesized Web Audio API sound generator
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function playKeySound(type = 'click') {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new AudioContext();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'click') {
+                    // Crisp mechanical click
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.04);
+                    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.04);
+                } else if (type === 'error') {
+                    // Soft error tone
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(140, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.1);
+                } else if (type === 'chime') {
+                    // Vista Glass finish chime
+                    const now = audioCtx.currentTime;
+                    const osc1 = audioCtx.createOscillator();
+                    const osc2 = audioCtx.createOscillator();
+                    const gain1 = audioCtx.createGain();
+
+                    osc1.type = 'sine';
+                    osc2.type = 'sine';
+                    osc1.frequency.setValueAtTime(523.25, now); // C5
+                    osc2.frequency.setValueAtTime(659.25, now); // E5
+
+                    osc1.connect(gain1);
+                    osc2.connect(gain1);
+                    gain1.connect(audioCtx.destination);
+
+                    gain1.gain.setValueAtTime(0.2, now);
+                    gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+
+                    osc1.start(now);
+                    osc2.start(now);
+                    osc1.stop(now + 0.8);
+                    osc2.stop(now + 0.8);
+                }
+            } catch (e) {
+                // Audio safely ignored
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('sound-icon').innerText = soundEnabled ? '🔊' : '🔇';
+        }
+
+        function generateAeroBackgroundIcons() {
+            const container = document.getElementById('aero-icon-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            // 1. Windows Vista Tropical Goldfish SVGs (Iconic Frutiger Aero Mascot)
+            for (let i = 0; i < 3; i++) {
+                const fish = document.createElement('div');
+                fish.className = 'aero-icon-element aero-fish';
+                fish.style.animationDelay = `${i * 7}s`;
+                fish.style.animationDuration = `${18 + i * 5}s`;
+                fish.innerHTML = `
+                    <svg width="90" height="60" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="fishGrad${i}" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ff9a44" />
+                                <stop offset="50%" stop-color="#fc6076" />
+                                <stop offset="100%" stop-color="#ffee75" />
+                            </linearGradient>
+                            <linearGradient id="finGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="rgba(255,255,255,0.8)"/>
+                                <stop offset="100%" stop-color="rgba(255, 150, 50, 0.5)"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Tail Fin -->
+                        <path d="M 30 35 C 10 10, 0 20, 2 35 C 0 50, 10 60, 30 35 Z" fill="url(#finGrad)" />
+                        <!-- Main Body -->
+                        <path d="M 25 35 C 35 10, 80 15, 95 35 C 80 55, 35 60, 25 35 Z" fill="url(#fishGrad${i})" />
+                        <!-- Dorsal Fin -->
+                        <path d="M 50 18 C 65 0, 80 10, 75 20 Z" fill="url(#finGrad)" />
+                        <!-- Eye -->
+                        <circle cx="82" cy="30" r="4" fill="white" />
+                        <circle cx="83" cy="30" r="2" fill="#111" />
+                        <circle cx="84" cy="29" r="0.8" fill="white" />
+                        <!-- Glossy Highlight -->
+                        <path d="M 40 22 C 60 18, 80 22, 85 28 C 75 24, 55 22, 40 26 Z" fill="rgba(255,255,255,0.6)" />
+                    </svg>
+                `;
+                container.appendChild(fish);
+            }
+
+            // 2. Glossy Eco Leaves (Nature / Eco Frutiger Aero Theme)
+            for (let i = 0; i < 5; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'aero-icon-element aero-leaf';
+                leaf.style.left = `${10 + i * 20}%`;
+                leaf.style.animationDelay = `${i * 3.2}s`;
+                leaf.style.animationDuration = `${14 + i * 3}s`;
+                leaf.innerHTML = `
+                    <svg width="45" height="45" viewBox="0 0 60 60" fill="none">
+                        <defs>
+                            <linearGradient id="leafGrad${i}" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#a8ff78" />
+                                <stop offset="100%" stop-color="#00b4db" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 10 50 C 10 20, 40 10, 50 10 C 50 40, 30 50, 10 50 Z" fill="url(#leafGrad${i})" opacity="0.85" />
+                        <path d="M 10 50 Q 30 30 50 10" stroke="rgba(255,255,255,0.8)" stroke-width="2" />
+                        <!-- Specular Reflection -->
+                        <path d="M 20 40 C 22 25, 38 18, 45 14 C 35 22, 25 30, 20 40 Z" fill="rgba(255,255,255,0.5)" />
+                    </svg>
+                `;
+                container.appendChild(leaf);
+            }
+
+            // 3. Glass Orbs with Micro Icons inside (Vista Orb Style)
+            const orbIcons = ['💧', '🌿', '🌐', '✨', '💿'];
+            for (let i = 0; i < 5; i++) {
+                const orb = document.createElement('div');
+                orb.className = 'aero-icon-element aero-orb';
+                orb.style.left = `${8 + i * 22}%`;
+                orb.style.top = `${15 + (i % 3) * 25}%`;
+                orb.style.animationDelay = `${i * 1.5}s`;
+                orb.style.animationDuration = `${10 + i * 2}s`;
+                orb.innerHTML = `
+                    <div style="
+                        width: 50px; 
+                        height: 50px; 
+                        border-radius: 50%; 
+                        background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.95) 0%, rgba(0, 210, 255, 0.4) 50%, rgba(0, 120, 215, 0.7) 100%);
+                        box-shadow: inset -3px -3px 8px rgba(0,0,0,0.2), inset 3px 3px 8px rgba(255,255,255,0.9), 0 10px 20px rgba(0,80,160,0.3);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 20px;
+                        border: 1px solid rgba(255,255,255,0.8);
+                        backdrop-filter: blur(4px);
+                    ">
+                        <span style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">${orbIcons[i]}</span>
+                    </div>
+                `;
+                container.appendChild(orb);
+            }
+
+            // 4. Frutiger Aero Sparkles & Stars
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'aero-icon-element aero-sparkle';
+                sparkle.style.left = `${Math.random() * 90}%`;
+                sparkle.style.top = `${Math.random() * 85}%`;
+                sparkle.style.animationDelay = `${Math.random() * 4}s`;
+                sparkle.innerHTML = `
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path d="M12 0 L14 9 L23 12 L14 15 L12 24 L10 15 L1 12 L10 9 Z" opacity="0.9" />
+                    </svg>
+                `;
+                container.appendChild(sparkle);
+            }
+        }
+
+        // Initialize on Load
+        window.onload = () => {
+            generateFloatingBubbles();
+            generateAeroBackgroundIcons();
+            resetTest();
+
+            // Keyboard and Focus handlers
+            hiddenInput.addEventListener('input', handleTypingInput);
+            
+            // Global key press listener for quick restart or automatic focus
+            window.addEventListener('keydown', (e) => {
+                if (!isTestFinished && document.activeElement !== hiddenInput) {
+                    focusInput();
+                }
+            });
+        };
+
+        // Create floating Aero water bubbles
+        function generateFloatingBubbles() {
+            const container = document.getElementById('bubble-container');
+            container.innerHTML = '';
+            for (let i = 0; i < 12; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 40 + 15;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${Math.random() * 95}%`;
+                bubble.style.animationDelay = `${Math.random() * 10}s`;
+                bubble.style.animationDuration = `${10 + Math.random() * 8}s`;
+                container.appendChild(bubble);
+            }
+        }
+
+        function setDifficulty(diff) {
+            currentDifficulty = diff;
+            document.querySelectorAll('#difficulty-selector .aero-btn').forEach(btn => btn.classList.remove('aero-btn-active'));
+            document.getElementById(`btn-${diff}`).classList.add('aero-btn-active');
+            resetTest();
+        }
+
+        function setTimeMode(seconds) {
+            currentTimeLimit = seconds;
+            document.querySelectorAll('#time-selector .aero-btn').forEach(btn => btn.classList.remove('aero-btn-active'));
+            document.getElementById(`btn-time-${seconds}`).classList.add('aero-btn-active');
+            resetTest();
+        }
+
+        function focusInput() {
+            if (isTestFinished) return;
+            hiddenInput.focus();
+            clickPrompt.style.opacity = '0';
+        }
+
+        function resetTest() {
+            clearInterval(timer);
+            timer = null;
+            isTestRunning = false;
+            isTestFinished = false;
+            timeRemaining = currentTimeLimit;
+            typedHistory = "";
+            totalTypedKeys = 0;
+            totalErrors = 0;
+
+            hiddenInput.value = "";
+            clickPrompt.style.opacity = '1';
+
+            // Select random text from target difficulty
+            const corpus = TEXT_CORPUS[currentDifficulty];
+            targetText = corpus[Math.floor(Math.random() * corpus.length)];
+
+            // Render Character Spans
+            renderTextDisplay();
+
+            // Reset UI Metrics
+            statWpm.innerText = "0";
+            statAccuracy.innerText = "100%";
+            statErrors.innerText = "0";
+            statTime.innerText = `${timeRemaining}s`;
+            timerProgress.style.width = '100%';
+
+            closeModal();
+        }
+
+        function renderTextDisplay() {
+            textDisplay.innerHTML = "";
+            const chars = targetText.split('');
+
+            chars.forEach((char, index) => {
+                const span = document.createElement('span');
+                span.innerText = char;
+                span.id = `char-${index}`;
+                
+                if (index === 0) {
+                    span.classList.add('char-current');
+                }
+                textDisplay.appendChild(span);
+            });
+        }
+
+        function handleTypingInput(e) {
+            if (isTestFinished) return;
+
+            const inputVal = hiddenInput.value;
+            
+            // Start timer on first keystroke
+            if (!isTestRunning && inputVal.length > 0) {
+                startTimer();
+            }
+
+            const currentLength = inputVal.length;
+            const previousLength = typedHistory.length;
+
+            // Detect typed key sound vs error
+            if (currentLength > previousLength) {
+                totalTypedKeys++;
+                const lastTypedChar = inputVal[currentLength - 1];
+                const expectedChar = targetText[currentLength - 1];
+
+                if (lastTypedChar === expectedChar) {
+                    playKeySound('click');
+                } else {
+                    totalErrors++;
+                    playKeySound('error');
+                }
+            } else {
+                playKeySound('click'); // Backspace sound
+            }
+
+            typedHistory = inputVal;
+            updateCharacterStyles();
+            calculateMetrics();
+
+            // Check completion condition
+            if (inputVal.length >= targetText.length) {
+                finishTest();
+            }
+        }
+
+        function updateCharacterStyles() {
+            const inputChars = typedHistory.split('');
+            const targetChars = targetText.split('');
+
+            targetChars.forEach((_, index) => {
+                const span = document.getElementById(`char-${index}`);
+                if (!span) return;
+
+                // Reset classes
+                span.className = "";
+
+                if (index < inputChars.length) {
+                    if (inputChars[index] === targetChars[index]) {
+                        span.classList.add('char-correct');
+                    } else {
+                        span.classList.add('char-incorrect');
+                    }
+                } else if (index === inputChars.length) {
+                    span.classList.add('char-current');
+                }
+            });
+        }
+
+        function startTimer() {
+            isTestRunning = true;
+            const startTime = Date.now();
+            const totalDuration = currentTimeLimit;
+
+            timer = setInterval(() => {
+                const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+                timeRemaining = totalDuration - elapsedSeconds;
+
+                if (timeRemaining <= 0) {
+                    timeRemaining = 0;
+                    finishTest();
+                }
+
+                statTime.innerText = `${timeRemaining}s`;
+                const percentage = (timeRemaining / totalDuration) * 100;
+                timerProgress.style.width = `${percentage}%`;
+
+                calculateMetrics();
+            }, 200);
+        }
+
+        function calculateMetrics() {
+            const elapsedTimeInMinutes = (currentTimeLimit - timeRemaining) / 60 || (1 / 60);
+            
+            // Correct characters count
+            let correctChars = 0;
+            const typedChars = typedHistory.split('');
+            typedChars.forEach((c, idx) => {
+                if (c === targetText[idx]) correctChars++;
+            });
+
+            // WPM standard formula: (Correct Characters / 5) / Time In Minutes
+            const wpm = Math.max(0, Math.round((correctChars / 5) / elapsedTimeInMinutes));
+            
+            // Accuracy formula: (Correct Chars / Total Typed Keys) * 100
+            let accuracy = 100;
+            if (totalTypedKeys > 0) {
+                accuracy = Math.round((correctChars / totalTypedKeys) * 100);
+            }
+
+            // Update DOM metrics
+            statWpm.innerText = isNaN(wpm) ? 0 : wpm;
+            statAccuracy.innerText = `${accuracy}%`;
+            statErrors.innerText = totalErrors;
+
+            return { wpm, accuracy, correctChars };
+        }
+
+        function finishTest() {
+            clearInterval(timer);
+            isTestRunning = false;
+            isTestFinished = true;
+            hiddenInput.blur();
+
+            playKeySound('chime');
+
+            const { wpm, accuracy, correctChars } = calculateMetrics();
+            const elapsedTimeInMinutes = (currentTimeLimit - timeRemaining) / 60 || (1 / 60);
+            const cpm = Math.round(correctChars / elapsedTimeInMinutes);
+
+            // Modal Metrics
+            document.getElementById('modal-wpm').innerText = wpm;
+            document.getElementById('modal-accuracy').innerText = `${accuracy}%`;
+            document.getElementById('modal-cpm').innerText = isNaN(cpm) ? 0 : cpm;
+            document.getElementById('modal-errors').innerText = totalErrors;
+
+            // Custom Title based on WPM Performance
+            const resultTitle = document.getElementById('result-title');
+            if (wpm > 60) {
+                resultTitle.innerText = "¡Nivel Maestro Vista Aero!";
+            } else if (wpm > 35) {
+                resultTitle.innerText = "¡Excelente Velocidad!";
+            } else {
+                resultTitle.innerText = "¡Buen Intento!";
+            }
+
+            openModal();
+        }
+
+        function openModal() {
+            const modal = document.getElementById('results-modal');
+            const card = document.getElementById('modal-card');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('results-modal');
+            const card = document.getElementById('modal-card');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            card.classList.remove('scale-100');
+            card.classList.add('scale-95');
+        }
+
+        function copyResults() {
+            const wpm = document.getElementById('modal-wpm').innerText;
+            const accuracy = document.getElementById('modal-accuracy').innerText;
+            const textToCopy = `AeroType 2006 Result: ${wpm} WPM | Precisión: ${accuracy} | Dificultad: ${currentDifficulty.toUpperCase()}`;
+            
+            // Clipboard copy fallbacks
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy);
+            } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = textToCopy;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            }
+
+            const copyBtn = event.target;
+            const originalText = copyBtn.innerText;
+            copyBtn.innerText = "✓ ¡Copiado!";
+            setTimeout(() => copyBtn.innerText = originalText, 2000);
+        }
+    </script>
+</body>
+</html>
