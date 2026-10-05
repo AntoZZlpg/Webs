@@ -1,0 +1,2342 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="obsidian" data-accent="emerald" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DistroVerse 4.0 Hub - Explora, Compara y Domina Linux & Sistemas Operativos</title>
+    
+    <!-- External Libraries: Tailwind CSS, FontAwesome, Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: 'var(--color-brand-50)',
+                            100: 'var(--color-brand-100)',
+                            500: 'var(--color-brand-500)',
+                            600: 'var(--color-brand-600)',
+                            700: 'var(--color-brand-700)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['var(--current-font)', 'Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* CSS Root Variables for Themes & Accents */
+        :root {
+            --current-font: 'Inter';
+            
+            /* Accent Colors Default (Emerald) */
+            --color-brand-50: #ecfdf5;
+            --color-brand-100: #d1fae5;
+            --color-brand-500: #10b981;
+            --color-brand-600: #059669;
+            --color-brand-700: #047857;
+            --color-brand-glow: rgba(16, 185, 129, 0.3);
+        }
+
+        /* Accent Color Sets */
+        [data-accent="emerald"] {
+            --color-brand-50: #ecfdf5; --color-brand-100: #d1fae5; --color-brand-500: #10b981; --color-brand-600: #059669; --color-brand-700: #047857; --color-brand-glow: rgba(16, 185, 129, 0.35);
+        }
+        [data-accent="cyan"] {
+            --color-brand-50: #ecfeff; --color-brand-100: #cffaff; --color-brand-500: #06b6d4; --color-brand-600: #0891b2; --color-brand-700: #0e7490; --color-brand-glow: rgba(6, 182, 212, 0.35);
+        }
+        [data-accent="violet"] {
+            --color-brand-50: #f5f3ff; --color-brand-100: #ede9fe; --color-brand-500: #8b5cf6; --color-brand-600: #7c3aed; --color-brand-700: #6d28d9; --color-brand-glow: rgba(139, 92, 246, 0.35);
+        }
+        [data-accent="rose"] {
+            --color-brand-50: #fff1f2; --color-brand-100: #ffe4e6; --color-brand-500: #f43f5e; --color-brand-600: #e11d48; --color-brand-700: #be123c; --color-brand-glow: rgba(244, 63, 94, 0.35);
+        }
+        [data-accent="amber"] {
+            --color-brand-50: #fffbeb; --color-brand-100: #fef3c7; --color-brand-500: #f59e0b; --color-brand-600: #d97706; --color-brand-700: #b45309; --color-brand-glow: rgba(245, 158, 11, 0.35);
+        }
+        [data-accent="neon"] {
+            --color-brand-50: #f0fdf4; --color-brand-100: #dcfce7; --color-brand-500: #22c55e; --color-brand-600: #16a34a; --color-brand-700: #15803d; --color-brand-glow: rgba(34, 197, 94, 0.45);
+        }
+
+        /* 1. Theme: OBSIDIAN (Dark Deep Slate) */
+        [data-theme="obsidian"] {
+            --bg-main: #090d16;
+            --bg-card: rgba(17, 24, 39, 0.85);
+            --bg-card-hover: rgba(31, 41, 55, 0.95);
+            --border-color: rgba(55, 65, 81, 0.6);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --header-bg: rgba(15, 23, 42, 0.85);
+        }
+
+        /* 2. Theme: LIGHT (Clean & Modern High Contrast) */
+        [data-theme="light"] {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
+            --border-color: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --header-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        /* 3. Theme: AERO (Frutiger Aero Glassy & Glossy) */
+        [data-theme="aero"] {
+            --bg-main: linear-gradient(135deg, #021e38 0%, #083358 40%, #0d5c75 100%);
+            --bg-card: rgba(255, 255, 255, 0.12);
+            --bg-card-hover: rgba(255, 255, 255, 0.22);
+            --border-color: rgba(255, 255, 255, 0.3);
+            --text-main: #ffffff;
+            --text-muted: #bae6fd;
+            --header-bg: rgba(2, 30, 56, 0.75);
+            backdrop-filter: blur(12px);
+        }
+
+        /* 4. Theme: CYBERPUNK (Neon & High Contrast Glitch Aesthetic) */
+        [data-theme="cyberpunk"] {
+            --bg-main: #0a0017;
+            --bg-card: rgba(24, 9, 43, 0.9);
+            --bg-card-hover: rgba(43, 14, 78, 0.95);
+            --border-color: #ff0055;
+            --text-main: #00ffff;
+            --text-muted: #ff7700;
+            --header-bg: rgba(10, 0, 23, 0.92);
+        }
+
+        /* 5. Theme: NORD (Arctic Frost Slate Blue) */
+        [data-theme="nord"] {
+            --bg-main: #2e3440;
+            --bg-card: #3b4252;
+            --bg-card-hover: #434c5e;
+            --border-color: #4c566a;
+            --text-main: #eceff4;
+            --text-muted: #d8dee9;
+            --header-bg: rgba(46, 52, 64, 0.9);
+        }
+
+        body {
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--current-font), sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            min-height: 100vh;
+        }
+
+        .theme-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .theme-card:hover {
+            background-color: var(--bg-card-hover);
+            box-shadow: 0 10px 25px -5px var(--color-brand-glow);
+        }
+
+        .theme-header {
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+        }
+
+        /* =========================================================
+           REQUIRED ANIMATIONS SPECIFIC TO ACTIVE THEME IN TAB SWITCH
+           ========================================================= */
+
+        /* 1. Obsidian: Fade & Slide Up */
+        @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(28px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .anim-fade-slide-up {
+            animation: fadeSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* 2. Light: Soft Scale & Clean Fade */
+        @keyframes softScaleFade {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .anim-soft-scale-fade {
+            animation: softScaleFade 0.35s ease-out forwards;
+        }
+
+        /* 3. Aero: Floating Crystal Ripple with Blur & Bounce */
+        @keyframes aeroFloatRipple {
+            0% { opacity: 0; filter: blur(14px); transform: translateY(20px) scale(0.97); }
+            65% { filter: blur(2px); transform: translateY(-4px) scale(1.01); }
+            100% { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
+        }
+        .anim-aero-float-ripple {
+            animation: aeroFloatRipple 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* 4. Cyberpunk: Glitch In with Neon Skew & Flash */
+        @keyframes cyberGlitchIn {
+            0% { opacity: 0; transform: skewX(-12deg) translateX(-25px); filter: drop-shadow(3px 0 0 #ff0055) drop-shadow(-3px 0 0 #00ffff); }
+            40% { transform: skewX(8deg) translateX(12px); filter: drop-shadow(-2px 0 0 #ff0055) drop-shadow(2px 0 0 #00ffff); }
+            70% { transform: skewX(-3deg) translateX(-4px); }
+            100% { opacity: 1; transform: skewX(0) translateX(0); filter: none; }
+        }
+        .anim-cyber-glitch-in {
+            animation: cyberGlitchIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* 5. Nord: Arctic Lateral Slide with Frozen Brightness */
+        @keyframes nordArcticSlide {
+            0% { opacity: 0; transform: translateX(-35px); filter: brightness(1.35) contrast(1.1); }
+            100% { opacity: 1; transform: translateX(0); filter: brightness(1) contrast(1); }
+        }
+        .anim-nord-arctic-slide {
+            animation: nordArcticSlide 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* Gentle float animation for Tux on left */
+        @keyframes tuxFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+        .animate-tux-float {
+            animation: tuxFloat 4s ease-in-out infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-brand-600);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen relative">
+
+    <!-- FLOATING TUX MASCOT COMPANION ON THE LEFT MARGIN -->
+    <aside id="left-tux-companion" class="fixed left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 flex flex-col items-start gap-3 group">
+        <!-- Speech Bubble -->
+        <div id="tux-bubble" class="hidden sm:block opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-2 group-hover:translate-x-0 bg-gray-900/95 border border-brand-500/50 text-xs px-3 py-2 rounded-2xl shadow-xl max-w-[180px] pointer-events-auto cursor-pointer text-gray-200" onclick="talkTux()">
+            <div class="font-bold text-brand-500 flex items-center gap-1.5 mb-1">
+                <i class="fa-solid fa-comment-dots"></i> Tux dice:
+            </div>
+            <p id="tux-speech-text">¡Hola! Haz clic en mí para un consejo Linux o usa el Distro Finder.</p>
+        </div>
+
+        <!-- Interactive Vector Tux Mascot Button -->
+        <button onclick="talkTux()" title="¡Haz clic en Tux para interactuar!" class="relative p-2 rounded-2xl theme-card border border-brand-500/40 hover:border-brand-500 shadow-2xl hover:shadow-brand-500/30 transition-all animate-tux-float group-hover:scale-105">
+            <div class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-brand-500 animate-ping"></div>
+            <div class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-brand-500"></div>
+
+            <!-- Vector SVG Tux Mascot -->
+            <svg class="w-10 h-12 sm:w-12 sm:h-14 drop-shadow-md" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- Tux Body -->
+                <ellipse cx="50" cy="65" rx="38" ry="45" fill="#18181b" />
+                <!-- White Belly -->
+                <ellipse cx="50" cy="72" rx="26" ry="32" fill="#f8fafc" />
+                <!-- Feet -->
+                <path d="M 22 100 C 12 100 8 114 26 114 C 36 114 38 104 30 100 Z" fill="#f59e0b" />
+                <path d="M 78 100 C 88 100 92 114 74 114 C 64 114 62 104 70 100 Z" fill="#f59e0b" />
+                <!-- Wings/Flippers -->
+                <path d="M 14 55 C 2 70 8 85 16 80 C 22 75 20 62 16 55 Z" fill="#18181b" />
+                <path d="M 86 55 C 98 70 92 85 84 80 C 78 75 80 62 84 55 Z" fill="#18181b" />
+                <!-- Head -->
+                <circle cx="50" cy="38" r="28" fill="#18181b" />
+                <!-- Face White Patch -->
+                <ellipse cx="50" cy="42" rx="20" ry="18" fill="#f8fafc" />
+                <!-- Eyes -->
+                <ellipse cx="42" cy="34" rx="4" ry="6" fill="#0f172a" />
+                <ellipse cx="58" cy="34" rx="4" ry="6" fill="#0f172a" />
+                <circle cx="43" cy="32" r="1.5" fill="#ffffff" />
+                <circle cx="59" cy="32" r="1.5" fill="#ffffff" />
+                <!-- Beak -->
+                <path d="M 42 42 Q 50 38 58 42 Q 50 54 42 42 Z" fill="#f59e0b" stroke="#d97706" stroke-width="1" />
+            </svg>
+        </button>
+    </aside>
+
+    <!-- TOP NAVIGATION HEADER -->
+    <header class="theme-header sticky top-0 z-40 w-full transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+                <!-- Logo / Brand with Tux Logo -->
+                <div class="flex items-center gap-3 cursor-pointer group" onclick="switchTab('home')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white shadow-lg shadow-brand-500/30 transform group-hover:scale-110 transition-transform overflow-hidden p-1">
+                        <!-- SVG Tux Logo in Header -->
+                        <svg class="w-full h-full drop-shadow" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="50" cy="65" rx="38" ry="45" fill="#18181b" />
+                            <ellipse cx="50" cy="72" rx="26" ry="32" fill="#ffffff" />
+                            <path d="M 22 100 C 12 100 8 114 26 114 C 36 114 38 104 30 100 Z" fill="#f59e0b" />
+                            <path d="M 78 100 C 88 100 92 114 74 114 C 64 114 62 104 70 100 Z" fill="#f59e0b" />
+                            <path d="M 14 55 C 2 70 8 85 16 80 C 22 75 20 62 16 55 Z" fill="#18181b" />
+                            <path d="M 86 55 C 98 70 92 85 84 80 C 78 75 80 62 84 55 Z" fill="#18181b" />
+                            <circle cx="50" cy="38" r="28" fill="#18181b" />
+                            <ellipse cx="50" cy="42" rx="20" ry="18" fill="#ffffff" />
+                            <ellipse cx="42" cy="34" rx="4" ry="6" fill="#0f172a" />
+                            <ellipse cx="58" cy="34" rx="4" ry="6" fill="#0f172a" />
+                            <circle cx="43" cy="32" r="1.5" fill="#ffffff" />
+                            <circle cx="59" cy="32" r="1.5" fill="#ffffff" />
+                            <path d="M 42 42 Q 50 38 58 42 Q 50 54 42 42 Z" fill="#f59e0b" />
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-brand-500 via-emerald-400 to-teal-300 bg-clip-text text-transparent">
+                            DistroVerse
+                        </span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-brand-500/20 text-brand-500 font-bold">TUX 4.0</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 text-brand-500 bg-brand-500/10">
+                        <i class="fa-solid fa-house"></i> Inicio
+                    </button>
+                    <button onclick="switchTab('catalog')" id="nav-catalog" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 hover:bg-brand-500/10">
+                        <i class="fa-solid fa-layer-group"></i> Catálogo Linux
+                    </button>
+                    <button onclick="switchTab('wizard')" id="nav-wizard" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 hover:bg-brand-500/10">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Distro Finder
+                    </button>
+                    <button onclick="switchTab('usb-guide')" id="nav-usb-guide" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 hover:bg-brand-500/10">
+                        <i class="fa-solid fa-usb"></i> Guía Bootable
+                    </button>
+                    <button onclick="switchTab('windows-vault')" id="nav-windows-vault" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 hover:bg-brand-500/10">
+                        <i class="fa-brands fa-windows"></i> Bóveda Windows
+                    </button>
+                    <button onclick="switchTab('hash-tool')" id="nav-hash-tool" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 hover:bg-brand-500/10">
+                        <i class="fa-solid fa-shield-halved"></i> Hash SHA-256
+                    </button>
+                </nav>
+
+                <!-- Actions: Comparator Dock Counter & Settings Toggle -->
+                <div class="flex items-center gap-3">
+                    <!-- Compare Counter Button -->
+                    <button onclick="openCompareModal()" class="relative p-2 rounded-lg theme-card hover:border-brand-500 transition-all flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-solid fa-scale-balanced text-brand-500"></i>
+                        <span class="hidden sm:inline">Comparar</span>
+                        <span id="compare-badge" class="w-5 h-5 rounded-full bg-brand-500 text-white text-xs flex items-center justify-center font-bold">0</span>
+                    </button>
+
+                    <!-- Settings Drawer Toggle -->
+                    <button onclick="toggleSettingsDrawer()" class="p-2.5 rounded-lg bg-brand-500/10 text-brand-500 hover:bg-brand-500 hover:text-white transition-all" title="Personalización">
+                        <i class="fa-solid fa-sliders text-lg"></i>
+                    </button>
+
+                    <!-- Mobile Navigation Toggle Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-lg theme-card text-gray-300">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Navigation Container -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-800 bg-gray-900/95 backdrop-blur-md px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('home'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium flex items-center gap-3 text-brand-500 bg-brand-500/10">
+                <i class="fa-solid fa-house"></i> Inicio
+            </button>
+            <button onclick="switchTab('catalog'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium flex items-center gap-3 hover:bg-brand-500/10">
+                <i class="fa-solid fa-layer-group"></i> Catálogo Linux (25+)
+            </button>
+            <button onclick="switchTab('wizard'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium flex items-center gap-3 hover:bg-brand-500/10">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Distro Finder Wizard
+            </button>
+            <button onclick="switchTab('usb-guide'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium flex items-center gap-3 hover:bg-brand-500/10">
+                <i class="fa-solid fa-usb"></i> Guía Crear USB Bootable
+            </button>
+            <button onclick="switchTab('windows-vault'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium flex items-center gap-3 hover:bg-brand-500/10">
+                <i class="fa-brands fa-windows"></i> Bóveda Oficial Windows
+            </button>
+            <button onclick="switchTab('hash-tool'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium flex items-center gap-3 hover:bg-brand-500/10">
+                <i class="fa-solid fa-shield-halved"></i> Verificador SHA-256
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER WITH DYNAMIC ANIMATED TABS -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
+
+        <!-- TAB 1: HOME / DASHBOARD -->
+        <section id="section-home" class="tab-content space-y-12">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden rounded-3xl theme-card p-8 sm:p-12 border border-brand-500/30">
+                <div class="absolute -right-20 -top-20 w-80 h-80 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="relative z-10 max-w-3xl space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-500/20 text-brand-500 text-xs font-semibold uppercase tracking-wider border border-brand-500/30">
+                        <i class="fa-brands fa-linux text-base"></i> Ecosistema Linux & Windows 2026
+                    </div>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                        Encuentra la Distribución Linux <span class="bg-gradient-to-r from-brand-500 via-teal-400 to-emerald-300 bg-clip-text text-transparent">Perfecta para tu Equipo</span>
+                    </h1>
+                    <p class="text-base sm:text-lg opacity-80 leading-relaxed">
+                        Explora más de 25 sistemas operativos detallados con métricas reales de RAM, kernel, entorno de escritorio y gestor de paquetes. Utiliza nuestras herramientas integradas para validar SHA-256, crear USBs de arranque y descargar ISOs oficiales.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="switchTab('catalog')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-500 to-brand-700 text-white font-semibold shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 hover:scale-[1.02] transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-compass"></i> Explorar Catálogo Completo
+                        </button>
+                        <button onclick="switchTab('wizard')" class="px-6 py-3.5 rounded-xl theme-card font-semibold hover:border-brand-500 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-brand-500"></i> Distro Finder (Asistente)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Quick Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                <div class="theme-card p-5 rounded-2xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold">25+</div>
+                        <div class="text-xs opacity-75">Distros Linux Reales</div>
+                    </div>
+                </div>
+                <div class="theme-card p-5 rounded-2xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-desktop"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold">8+</div>
+                        <div class="text-xs opacity-75">Escritorios (DE/WM)</div>
+                    </div>
+                </div>
+                <div class="theme-card p-5 rounded-2xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold">WebCrypto</div>
+                        <div class="text-xs opacity-75">Hash Local ultra-rápido</div>
+                    </div>
+                </div>
+                <div class="theme-card p-5 rounded-2xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl">
+                        <i class="fa-brands fa-windows"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold">Win 11/10</div>
+                        <div class="text-xs opacity-75">Bóveda Oficial ISO</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Linux Distros Grid Banner -->
+            <div class="space-y-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold">Distribuciones Destacadas</h2>
+                        <p class="text-sm opacity-75">Las opciones más recomendadas y populares de la comunidad</p>
+                    </div>
+                    <button onclick="switchTab('catalog')" class="text-sm font-medium text-brand-500 hover:underline flex items-center gap-1">
+                        Ver todas <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div id="featured-distro-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Dynamic Featured Distros Injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: CATALOG LINUX (25+ DISTROS) -->
+        <section id="section-catalog" class="tab-content hidden space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight">Catálogo de Distribuciones Linux</h1>
+                    <p class="text-sm opacity-75 mt-1">Filtra por arquitectura, requerimientos de RAM, entorno de escritorio o uso principal.</p>
+                </div>
+                <div class="text-sm px-3 py-1.5 rounded-lg theme-card font-mono text-brand-500">
+                    Mostrando <span id="distro-count-badge" class="font-bold">0</span> sistemas
+                </div>
+            </div>
+
+            <!-- Multi-Criteria Filter Controls Panel -->
+            <div class="theme-card p-6 rounded-2xl space-y-4">
+                <!-- Search Bar & Primary Sort -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="md:col-span-2 relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400"></i>
+                        <input type="text" id="filter-search" oninput="applyCatalogFilters()" placeholder="Buscar por nombre, etiquetas, gestor de paquetes o palabras clave..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-900/40 border border-gray-700/60 focus:border-brand-500 focus:outline-none text-sm">
+                    </div>
+                    <div>
+                        <select id="filter-sort" onchange="applyCatalogFilters()" class="w-full px-3 py-2.5 rounded-xl bg-gray-900/40 border border-gray-700/60 focus:border-brand-500 focus:outline-none text-sm">
+                            <option value="popular">Ordenar: Más Populares</option>
+                            <option value="rating">Ordenar: Mayor Calificación</option>
+                            <option value="name">Ordenar: Nombre A - Z</option>
+                            <option value="difficulty-asc">Dificultad: Principiante a Experto</option>
+                            <option value="difficulty-desc">Dificultad: Experto a Principiante</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dropdown Filter Grids -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-2 border-t border-gray-700/40">
+                    <!-- Base Filter -->
+                    <div>
+                        <label class="block text-xs font-semibold opacity-75 mb-1">Base Madre</label>
+                        <select id="filter-base" onchange="applyCatalogFilters()" class="w-full px-2.5 py-2 rounded-lg bg-gray-900/40 border border-gray-700/60 text-xs focus:border-brand-500 focus:outline-none">
+                            <option value="all">Todas las Bases</option>
+                            <option value="Debian">Debian</option>
+                            <option value="Ubuntu">Ubuntu</option>
+                            <option value="Arch">Arch Linux</option>
+                            <option value="RHEL/Fedora">Fedora / RHEL</option>
+                            <option value="SUSE">SUSE / openSUSE</option>
+                            <option value="Independent">Independiente</option>
+                        </select>
+                    </div>
+
+                    <!-- Desktop Filter -->
+                    <div>
+                        <label class="block text-xs font-semibold opacity-75 mb-1">Escritorio (DE)</label>
+                        <select id="filter-desktop" onchange="applyCatalogFilters()" class="w-full px-2.5 py-2 rounded-lg bg-gray-900/40 border border-gray-700/60 text-xs focus:border-brand-500 focus:outline-none">
+                            <option value="all">Todos los DE</option>
+                            <option value="GNOME">GNOME</option>
+                            <option value="KDE Plasma">KDE Plasma</option>
+                            <option value="XFCE">XFCE</option>
+                            <option value="Cinnamon">Cinnamon</option>
+                            <option value="COSMIC">COSMIC</option>
+                            <option value="Pantheon">Pantheon</option>
+                            <option value="CLI/Custom">CLI / Minimalista</option>
+                        </select>
+                    </div>
+
+                    <!-- Use Case Filter -->
+                    <div>
+                        <label class="block text-xs font-semibold opacity-75 mb-1">Uso Principal</label>
+                        <select id="filter-usecase" onchange="applyCatalogFilters()" class="w-full px-2.5 py-2 rounded-lg bg-gray-900/40 border border-gray-700/60 text-xs focus:border-brand-500 focus:outline-none">
+                            <option value="all">Todos los Usos</option>
+                            <option value="Daily">Uso Diario / General</option>
+                            <option value="Gaming">Gaming & Multimedia</option>
+                            <option value="Security">Seguridad & Ciberseguridad</option>
+                            <option value="Lightweight">Equipos Antiguos / Ligero</option>
+                            <option value="Server">Servidores / Nube</option>
+                            <option value="Developer">Desarrollo & Sysadmin</option>
+                        </select>
+                    </div>
+
+                    <!-- Max RAM Filter -->
+                    <div>
+                        <label class="block text-xs font-semibold opacity-75 mb-1">RAM Máxima Req.</label>
+                        <select id="filter-ram" onchange="applyCatalogFilters()" class="w-full px-2.5 py-2 rounded-lg bg-gray-900/40 border border-gray-700/60 text-xs focus:border-brand-500 focus:outline-none">
+                            <option value="all">Cualquier RAM</option>
+                            <option value="1024">≤ 1 GB RAM</option>
+                            <option value="2048">≤ 2 GB RAM</option>
+                            <option value="4096">≤ 4 GB RAM</option>
+                        </select>
+                    </div>
+
+                    <!-- Update Model Filter -->
+                    <div>
+                        <label class="block text-xs font-semibold opacity-75 mb-1">Modelo Actualización</label>
+                        <select id="filter-update" onchange="applyCatalogFilters()" class="w-full px-2.5 py-2 rounded-lg bg-gray-900/40 border border-gray-700/60 text-xs focus:border-brand-500 focus:outline-none">
+                            <option value="all">Cualquier Modelo</option>
+                            <option value="Fixed">LTS / Versión Fija</option>
+                            <option value="Rolling">Rolling Release</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Catalog Grid Container -->
+            <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Distro Cards Dynamically Rendered via JS -->
+            </div>
+        </section>
+
+        <!-- TAB 3: DISTRO FINDER WIZARD -->
+        <section id="section-wizard" class="tab-content hidden max-w-3xl mx-auto space-y-8">
+            <div class="text-center space-y-3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/20 text-brand-500 text-xs font-semibold">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Test Interactivo de 3 Pasos
+                </div>
+                <h1 class="text-3xl font-extrabold tracking-tight">Distro Finder Wizard</h1>
+                <p class="text-sm opacity-75">Responde 3 preguntas sencillas y calcularemos qué distribución Linux encaja a la perfección con tus necesidades hardware y nivel de experiencia.</p>
+            </div>
+
+            <!-- Wizard Card Container -->
+            <div class="theme-card p-8 rounded-3xl space-y-8 border border-brand-500/30 relative">
+                <!-- Progress Indicator -->
+                <div class="flex items-center justify-between mb-6">
+                    <span id="wizard-step-badge" class="text-xs font-mono font-bold text-brand-500 uppercase">Paso 1 de 3</span>
+                    <div class="flex items-center gap-2">
+                        <div id="dot-1" class="w-3 h-3 rounded-full bg-brand-500"></div>
+                        <div id="dot-2" class="w-3 h-3 rounded-full bg-gray-700"></div>
+                        <div id="dot-3" class="w-3 h-3 rounded-full bg-gray-700"></div>
+                    </div>
+                </div>
+
+                <!-- STEP 1: Experience Level -->
+                <div id="wizard-step-1" class="space-y-6">
+                    <h2 class="text-xl font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-user-gear text-brand-500"></i> 1. ¿Cuál es tu nivel de experiencia con Linux?
+                    </h2>
+                    <div class="grid grid-cols-1 gap-4">
+                        <label onclick="selectWizardOption('exp', 'beginner')" class="theme-card p-4 rounded-xl cursor-pointer hover:border-brand-500 flex items-center gap-4 transition-all border border-transparent group">
+                            <div class="w-10 h-10 rounded-lg bg-green-500/20 text-green-400 flex items-center justify-center font-bold">1</div>
+                            <div>
+                                <div class="font-bold text-sm group-hover:text-brand-500">Principiante / Migración desde Windows</div>
+                                <div class="text-xs opacity-75">Busco un sistema listo para usar, fácil con tienda gráfica e instaladores visuales.</div>
+                            </div>
+                        </label>
+                        <label onclick="selectWizardOption('exp', 'intermediate')" class="theme-card p-4 rounded-xl cursor-pointer hover:border-brand-500 flex items-center gap-4 transition-all border border-transparent group">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">2</div>
+                            <div>
+                                <div class="font-bold text-sm group-hover:text-brand-500">Intermedio</div>
+                                <div class="text-xs opacity-75">Tengo conceptos básicos de terminal y quiero personalización sólida pero estable.</div>
+                            </div>
+                        </label>
+                        <label onclick="selectWizardOption('exp', 'advanced')" class="theme-card p-4 rounded-xl cursor-pointer hover:border-brand-500 flex items-center gap-4 transition-all border border-transparent group">
+                            <div class="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold">3</div>
+                            <div>
+                                <div class="font-bold text-sm group-hover:text-brand-500">Avanzado / Hacker / Sysadmin</div>
+                                <div class="text-xs opacity-75">Quiero control total desde cero, compilación, arch wiki o gestor funcional declarativo.</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Use Case -->
+                <div id="wizard-step-2" class="space-y-6 hidden">
+                    <h2 class="text-xl font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-bullseye text-brand-500"></i> 2. ¿Para qué usarás principalmente el equipo?
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <label onclick="selectWizardOption('use', 'Daily')" class="theme-card p-4 rounded-xl cursor-pointer hover:border-brand-500 transition-all border border-transparent">
+                            <i class="fa-solid fa-laptop text-xl text-brand-500 mb-2"></i>
+                            <div class="font-bold text-sm">Ofimática y Navegación</div>
+                            <div class="text-xs opacity-75 mt-1">Uso diario, multimedia, estudios y trabajo común.</div>
+                        </label>
+                        <label onclick="selectWizardOption('use', 'Gaming')" class="theme-card p-4 rounded-xl cursor-pointer hover:border-brand-500 transition-all border border-transparent">
+                            <i class="fa-solid fa-gamepad text-xl text-brand-500 mb-2"></i>
+                            <div class="font-bold text-sm">Gaming & Streaming</div>
+                            <div class="text-xs opacity-75 mt-1">Drivers Nvidia/AMD optimizados, Steam, Proton.</div>
+                        </label>
+                        <label onclick="selectWizardOption('use', 'Lightweight')" class="theme-card p-4 rounded-xl cursor-pointer hover:border-brand-500 transition-all border border-transparent">
+                            <i class="fa-solid fa-feather text-xl text-brand-500 mb-2"></i>
+                            <div class="font-bold text-sm">Revivir PC Antiguo</div>
+                            <div class="text-xs opacity-75 mt-1">Consumo ultraligero de memoria y procesador.</div>
+                        </label>
+                        <label onclick="selectWizardOption('use', 'Security')" class="theme-card p-4 rounded-xl cursor-pointer hover:border-brand-500 transition-all border border-transparent">
+                            <i class="fa-solid fa-user-shield text-xl text-brand-500 mb-2"></i>
+                            <div class="font-bold text-sm">Privacidad & Seguridad</div>
+                            <div class="text-xs opacity-75 mt-1">Auditoría, hacking ético o anonimato estricto.</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Hardware / RAM -->
+                <div id="wizard-step-3" class="space-y-6 hidden">
+                    <h2 class="text-xl font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-memory text-brand-500"></i> 3. ¿Cuánta Memoria RAM tiene tu ordenador?
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <label onclick="selectWizardOption('ram', 1024)" class="theme-card p-4 rounded-xl cursor-pointer hover:border-brand-500 transition-all text-center">
+                            <div class="text-2xl font-bold text-brand-500 mb-1">≤ 2 GB</div>
+                            <div class="text-xs opacity-75">Hardware antiguo o muy limitado</div>
+                        </label>
+                        <label onclick="selectWizardOption('ram', 2048)" class="theme-card p-4 rounded-xl cursor-pointer hover:border-brand-500 transition-all text-center">
+                            <div class="text-2xl font-bold text-brand-500 mb-1">4 GB</div>
+                            <div class="text-xs opacity-75">Hardware estándar medio</div>
+                        </label>
+                        <label onclick="selectWizardOption('ram', 8192)" class="theme-card p-4 rounded-xl cursor-pointer hover:border-brand-500 transition-all text-center">
+                            <div class="text-2xl font-bold text-brand-500 mb-1">8 GB+</div>
+                            <div class="text-xs opacity-75">Hardware moderno de alto rendimiento</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- RESULTS VIEW -->
+                <div id="wizard-results" class="space-y-6 hidden">
+                    <div class="text-center space-y-2">
+                        <i class="fa-solid fa-circle-check text-4xl text-brand-500"></i>
+                        <h2 class="text-2xl font-bold">¡Recomendaciones Calculadas!</h2>
+                        <p class="text-sm opacity-75">Estas son las distribuciones mejor puntuadas según tus requerimientos:</p>
+                    </div>
+                    <div id="wizard-distro-list" class="space-y-4">
+                        <!-- Dynamic Recommended Cards -->
+                    </div>
+                    <button onclick="resetWizard()" class="w-full py-3 rounded-xl border border-gray-700 hover:border-brand-500 text-sm font-semibold transition-all">
+                        <i class="fa-solid fa-rotate-left"></i> Reiniciar Asistente
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: USB BOOTABLE GUIDE & BIOS MATRIX -->
+        <section id="section-usb-guide" class="tab-content hidden space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight">Guía Interactiva para Crear USB Bootable</h1>
+                    <p class="text-sm opacity-75 mt-1">Aprende a flashear distribuciones ISO en tu pendrive paso a paso y consulta la tecla de arranque de tu placa madre.</p>
+                </div>
+            </div>
+
+            <!-- Tool Selector Buttons -->
+            <div class="flex flex-wrap gap-2 border-b border-gray-800 pb-4">
+                <button onclick="setUsbTool('ventoy')" id="tool-btn-ventoy" class="usb-tool-btn px-4 py-2.5 rounded-xl font-medium text-sm transition-all bg-brand-500 text-white flex items-center gap-2">
+                    <i class="fa-solid fa-box-archive"></i> Ventoy (Recomendado)
+                </button>
+                <button onclick="setUsbTool('rufus')" id="tool-btn-rufus" class="usb-tool-btn px-4 py-2.5 rounded-xl font-medium text-sm transition-all theme-card flex items-center gap-2">
+                    <i class="fa-solid fa-bolt"></i> Rufus (Windows)
+                </button>
+                <button onclick="setUsbTool('etcher')" id="tool-btn-etcher" class="usb-tool-btn px-4 py-2.5 rounded-xl font-medium text-sm transition-all theme-card flex items-center gap-2">
+                    <i class="fa-solid fa-compact-disc"></i> balenaEtcher
+                </button>
+                <button onclick="setUsbTool('dd')" id="tool-btn-dd" class="usb-tool-btn px-4 py-2.5 rounded-xl font-medium text-sm transition-all theme-card flex items-center gap-2">
+                    <i class="fa-solid fa-terminal"></i> Terminal `dd` (Linux/Mac)
+                </button>
+            </div>
+
+            <!-- Dynamic Tool Steps Content Box -->
+            <div id="usb-tool-content" class="theme-card p-6 sm:p-8 rounded-2xl space-y-6">
+                <!-- Dynamically updated by JS -->
+            </div>
+
+            <!-- Interactive BIOS & Boot Menu Key Finder Matrix -->
+            <div class="theme-card p-6 sm:p-8 rounded-2xl space-y-6 border border-brand-500/20">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-keyboard text-brand-500"></i> Buscador de Teclas de BIOS y Menú de Arranque (Boot Menu)
+                        </h2>
+                        <p class="text-xs opacity-75">Selecciona o busca la marca de tu portátil o tarjeta madre para saber qué tecla presionar al encender el equipo.</p>
+                    </div>
+                    <div class="relative w-full sm:w-64">
+                        <i class="fa-solid fa-search absolute left-3 top-3 text-gray-400 text-xs"></i>
+                        <input type="text" id="bios-search" oninput="filterBiosKeys()" placeholder="Buscar marca (Ej: ASUS, Dell)..." class="w-full pl-9 pr-3 py-2 rounded-lg bg-gray-900/50 border border-gray-700 text-xs focus:border-brand-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- Table Matrix -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead class="bg-gray-900/60 text-brand-500 uppercase font-mono border-b border-gray-700">
+                            <tr>
+                                <th class="p-3">Marca / Fabricante</th>
+                                <th class="p-3">Tecla Menú de Arranque (Boot Menu)</th>
+                                <th class="p-3">Tecla Entrada BIOS / UEFI</th>
+                                <th class="p-3">Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bios-matrix-body" class="divide-y divide-gray-800">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: WINDOWS OFFICIAL DOWNLOAD VAULT -->
+        <section id="section-windows-vault" class="tab-content hidden space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight">Bóveda Oficial de Descargas de Windows</h1>
+                    <p class="text-sm opacity-75 mt-1">Enlaces directos a los portales oficiales de Microsoft para ISOs originales y herramientas oficiales de instalación.</p>
+                </div>
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-500/10 text-blue-400 text-xs font-semibold">
+                    <i class="fa-brands fa-windows text-base"></i> Fuente 100% Oficial de Microsoft
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Windows 11 -->
+                <div class="theme-card p-6 rounded-2xl border-t-4 border-t-blue-500 flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <i class="fa-brands fa-windows text-3xl text-blue-500"></i>
+                            <span class="text-xs font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 font-bold">24H2 / 23H2</span>
+                        </div>
+                        <h3 class="text-xl font-bold">Windows 11 ISO</h3>
+                        <p class="text-xs opacity-75 leading-relaxed">
+                            Sistema operativo insignia de Microsoft con interfaz fluida, soporte TPM 2.0 y DirectStorage para gaming.
+                        </p>
+                        <div class="space-y-1 text-xs opacity-80 font-mono">
+                            <div><i class="fa-solid fa-microchip text-brand-500"></i> Req: 64-bit CPU, 4GB RAM, TPM 2.0</div>
+                            <div><i class="fa-solid fa-hard-drive text-brand-500"></i> Tamaño aprox: ~5.4 GB</div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 space-y-2">
+                        <a href="https://www.microsoft.com/software-download/windows11" target="_blank" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-download"></i> Portal Oficial Windows 11
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Windows 10 -->
+                <div class="theme-card p-6 rounded-2xl border-t-4 border-t-cyan-500 flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <i class="fa-brands fa-windows text-3xl text-cyan-500"></i>
+                            <span class="text-xs font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-400 font-bold">22H2 LTS</span>
+                        </div>
+                        <h3 class="text-xl font-bold">Windows 10 ISO</h3>
+                        <p class="text-xs opacity-75 leading-relaxed">
+                            El sistema más popular y compatible con hardware legacy. Ideal si tu ordenador no posee chip TPM 2.0.
+                        </p>
+                        <div class="space-y-1 text-xs opacity-80 font-mono">
+                            <div><i class="fa-solid fa-microchip text-brand-500"></i> Req: 32-bit / 64-bit, 2GB RAM</div>
+                            <div><i class="fa-solid fa-hard-drive text-brand-500"></i> Tamaño aprox: ~4.8 GB</div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 space-y-2">
+                        <a href="https://www.microsoft.com/software-download/windows10" target="_blank" class="w-full py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-download"></i> Portal Oficial Windows 10
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Windows Server -->
+                <div class="theme-card p-6 rounded-2xl border-t-4 border-t-purple-500 flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <i class="fa-solid fa-server text-3xl text-purple-500"></i>
+                            <span class="text-xs font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-400 font-bold">2022 / 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold">Windows Server Evaluation</h3>
+                        <p class="text-xs opacity-75 leading-relaxed">
+                            Ediciones para servidores empresariales, Active Directory, Hyper-V y entornos de red profesionales.
+                        </p>
+                        <div class="space-y-1 text-xs opacity-80 font-mono">
+                            <div><i class="fa-solid fa-clock text-brand-500"></i> Evaluación de 180 días renovable</div>
+                            <div><i class="fa-solid fa-hard-drive text-brand-500"></i> Tamaño aprox: ~5.0 GB</div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 space-y-2">
+                        <a href="https://www.microsoft.com/evalcenter/evaluate-windows-server-2022" target="_blank" class="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-download"></i> Evaluation Center Server
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rufus Bypass Windows 11 Note -->
+            <div class="theme-card p-6 rounded-2xl border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex-shrink-0 flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="font-bold text-sm">¿Tu equipo no cumple los requisitos de TPM 2.0 o Secure Boot en Windows 11?</h4>
+                    <p class="text-xs opacity-80">
+                        Al flashear la ISO de Windows 11 con la herramienta Rufus, activa la opción <code class="bg-gray-800 px-1.5 py-0.5 rounded font-mono text-amber-300">Remove requirement for 4GB+ RAM, Secure Boot and TPM 2.0</code> para poder instalarlo en cualquier ordenador.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 6: HASH SHA-256 VERIFIER -->
+        <section id="section-hash-tool" class="tab-content hidden max-w-3xl mx-auto space-y-8">
+            <div class="text-center space-y-3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-semibold">
+                    <i class="fa-solid fa-microchip"></i> Procesamiento Local con Web Crypto API
+                </div>
+                <h1 class="text-3xl font-extrabold tracking-tight">Verificador de Integridad Hash SHA-256</h1>
+                <p class="text-sm opacity-75">Selecciona la imagen ISO descargada para calcular su suma de verificación SHA-256 localmente en tu navegador sin subir nada a internet.</p>
+            </div>
+
+            <div class="theme-card p-8 rounded-3xl space-y-6">
+                <!-- Dropzone File Picker -->
+                <div id="dropzone" onclick="document.getElementById('file-input').click()" class="border-2 border-dashed border-gray-700 hover:border-brand-500 rounded-2xl p-8 text-center cursor-pointer transition-all bg-gray-900/20 hover:bg-gray-900/40">
+                    <input type="file" id="file-input" onchange="handleFileSelect(event)" class="hidden">
+                    <i class="fa-solid fa-cloud-arrow-up text-4xl text-brand-500 mb-3"></i>
+                    <h3 class="text-base font-bold">Haz clic o arrastra aquí tu archivo ISO</h3>
+                    <p class="text-xs opacity-60 mt-1">Soporta archivos de cualquier tamaño (.iso, .img, .bin)</p>
+                </div>
+
+                <!-- Selected File Info & Progress -->
+                <div id="hash-progress-container" class="hidden space-y-3">
+                    <div class="flex items-center justify-between text-xs font-mono">
+                        <span id="hash-filename" class="font-bold truncate max-w-xs">archivo.iso</span>
+                        <span id="hash-percentage" class="text-brand-500 font-bold">0%</span>
+                    </div>
+                    <!-- Progress Bar Track -->
+                    <div class="w-full h-3 rounded-full bg-gray-800 overflow-hidden">
+                        <div id="hash-progress-bar" class="h-full bg-gradient-to-r from-brand-500 to-emerald-400 transition-all duration-150 w-0"></div>
+                    </div>
+                </div>
+
+                <!-- Output Generated Hash string -->
+                <div class="space-y-2">
+                    <label class="block text-xs font-semibold uppercase tracking-wider opacity-75">Hash SHA-256 Calculado:</label>
+                    <div class="relative">
+                        <input type="text" id="calculated-hash" readonly placeholder="Esperando archivo..." class="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700 font-mono text-xs text-brand-500 focus:outline-none pr-10">
+                        <button onclick="copyCalculatedHash()" class="absolute right-3 top-2.5 text-gray-400 hover:text-white text-sm" title="Copiar al portapapeles">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hash Comparison Input Box -->
+                <div class="space-y-2 pt-2 border-t border-gray-800">
+                    <label class="block text-xs font-semibold uppercase tracking-wider opacity-75">Hash SHA-256 Esperado (Oficial):</label>
+                    <input type="text" id="expected-hash" oninput="compareHashes()" placeholder="Pega aquí la firma oficial proporcionada por el desarrollador..." class="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700 font-mono text-xs focus:border-brand-500 focus:outline-none">
+                </div>
+
+                <!-- Verification Result Banner -->
+                <div id="hash-match-status" class="hidden p-4 rounded-xl text-xs font-semibold flex items-center gap-3">
+                    <!-- Dynamic check mark / error cross injected via JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL 1: DISTRO DETAIL VIEW MODAL -->
+    <div id="detail-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="theme-card max-w-2xl w-full rounded-3xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto border border-brand-500/40 relative">
+            <button onclick="closeDetailModal()" class="absolute right-5 top-5 w-8 h-8 rounded-full bg-gray-800 hover:bg-gray-700 text-white flex items-center justify-center text-sm">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="detail-modal-content">
+                <!-- Dynamically Injected Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: SIDE-BY-SIDE DISTRO COMPARATOR MODAL -->
+    <div id="compare-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="theme-card max-w-5xl w-full rounded-3xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto border border-brand-500/40 relative">
+            <div class="flex items-center justify-between pb-4 border-b border-gray-800">
+                <h2 class="text-2xl font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-scale-balanced text-brand-500"></i> Comparativa Directa de Distribuciones
+                </h2>
+                <button onclick="closeCompareModal()" class="w-8 h-8 rounded-full bg-gray-800 hover:bg-gray-700 text-white flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="compare-modal-content" class="overflow-x-auto">
+                <!-- Dynamic Specs Comparison Table Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE-OVER DRAWER: APPEARANCE & CUSTOMIZATION SETTINGS -->
+    <div id="settings-drawer" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleSettingsDrawer()"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md theme-card p-6 space-y-6 overflow-y-auto border-l border-brand-500/30 shadow-2xl">
+            <div class="flex items-center justify-between pb-4 border-b border-gray-800">
+                <h3 class="text-lg font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-palette text-brand-500"></i> Personalización de Apariencia
+                </h3>
+                <button onclick="toggleSettingsDrawer()" class="text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- 1. Visual Theme Selection -->
+            <div class="space-y-3">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-500">Tema Visual de Interfaz</label>
+                <div class="grid grid-cols-1 gap-2">
+                    <button onclick="setTheme('obsidian')" class="w-full p-3 rounded-xl border border-gray-700 text-left flex items-center justify-between hover:border-brand-500">
+                        <div>
+                            <div class="font-bold text-xs">Obsidian Dark</div>
+                            <div class="text-[10px] opacity-60">Transición: Fade & Slide Up</div>
+                        </div>
+                        <span class="w-4 h-4 rounded-full bg-slate-900 border border-slate-700"></span>
+                    </button>
+                    <button onclick="setTheme('light')" class="w-full p-3 rounded-xl border border-gray-700 text-left flex items-center justify-between hover:border-brand-500">
+                        <div>
+                            <div class="font-bold text-xs">Modern Light</div>
+                            <div class="text-[10px] opacity-60">Transición: Soft Zoom & Scale</div>
+                        </div>
+                        <span class="w-4 h-4 rounded-full bg-slate-100 border border-slate-300"></span>
+                    </button>
+                    <button onclick="setTheme('aero')" class="w-full p-3 rounded-xl border border-gray-700 text-left flex items-center justify-between hover:border-brand-500">
+                        <div>
+                            <div class="font-bold text-xs">Frutiger Aero Glass</div>
+                            <div class="text-[10px] opacity-60">Transición: Floating Crystal Ripple</div>
+                        </div>
+                        <span class="w-4 h-4 rounded-full bg-cyan-600 border border-cyan-400"></span>
+                    </button>
+                    <button onclick="setTheme('cyberpunk')" class="w-full p-3 rounded-xl border border-gray-700 text-left flex items-center justify-between hover:border-brand-500">
+                        <div>
+                            <div class="font-bold text-xs">Cyberpunk Neon</div>
+                            <div class="text-[10px] opacity-60">Transición: Cyber Glitch Flash</div>
+                        </div>
+                        <span class="w-4 h-4 rounded-full bg-purple-900 border border-pink-500"></span>
+                    </button>
+                    <button onclick="setTheme('nord')" class="w-full p-3 rounded-xl border border-gray-700 text-left flex items-center justify-between hover:border-brand-500">
+                        <div>
+                            <div class="font-bold text-xs">Nord Arctic</div>
+                            <div class="text-[10px] opacity-60">Transición: Arctic Lateral Slide</div>
+                        </div>
+                        <span class="w-4 h-4 rounded-full bg-slate-600 border border-blue-300"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Accent Color Picker -->
+            <div class="space-y-3 pt-2 border-t border-gray-800">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-500">Color de Acento</label>
+                <div class="flex items-center gap-3">
+                    <button onclick="setAccent('emerald')" class="w-8 h-8 rounded-full bg-emerald-500 ring-2 ring-offset-2 ring-emerald-500/50"></button>
+                    <button onclick="setAccent('cyan')" class="w-8 h-8 rounded-full bg-cyan-500 ring-2 ring-offset-2 ring-cyan-500/50"></button>
+                    <button onclick="setAccent('violet')" class="w-8 h-8 rounded-full bg-violet-500 ring-2 ring-offset-2 ring-violet-500/50"></button>
+                    <button onclick="setAccent('rose')" class="w-8 h-8 rounded-full bg-rose-500 ring-2 ring-offset-2 ring-rose-500/50"></button>
+                    <button onclick="setAccent('amber')" class="w-8 h-8 rounded-full bg-amber-500 ring-2 ring-offset-2 ring-amber-500/50"></button>
+                    <button onclick="setAccent('neon')" class="w-8 h-8 rounded-full bg-green-500 ring-2 ring-offset-2 ring-green-500/50"></button>
+                </div>
+            </div>
+
+            <!-- 3. Font Family Selector -->
+            <div class="space-y-3 pt-2 border-t border-gray-800">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-500">Tipografía</label>
+                <select id="font-family-select" onchange="setFontFamily(this.value)" class="w-full p-2.5 rounded-xl bg-gray-900 border border-gray-700 text-xs focus:border-brand-500 focus:outline-none">
+                    <option value="Inter">Inter (Limpia y Moderna)</option>
+                    <option value="Outfit">Outfit (Moderna & Redondeada)</option>
+                    <option value="Poppins">Poppins (Geométrica)</option>
+                    <option value="Fira Code">Fira Code (Estilo Hacker/Terminal)</option>
+                </select>
+            </div>
+
+            <!-- 4. Web Audio API Sound Effects Toggle -->
+            <div class="space-y-3 pt-2 border-t border-gray-800">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="text-xs font-bold">Efectos de Sonido Web Audio API</div>
+                        <div class="text-[10px] opacity-60">Retroalimentación acústica al interactuar</div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="sound-toggle" checked onchange="toggleSound(this.checked)" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-500"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="theme-header border-t border-gray-800 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs opacity-75 space-y-2">
+            <p class="flex items-center justify-center gap-2">
+                <i class="fa-brands fa-linux text-base text-brand-500"></i> DistroVerse 4.0 Hub — Plataforma Interactiva de Exploración Linux con Tux Mascot
+            </p>
+            <p class="text-[10px] opacity-50">Procesamiento SHA-256 en cliente mediante Web Crypto API. Todos los enlaces apuntan a sitios oficiales.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* DATABASE OF 25 LINUX DISTROS */
+        const DISTRO_DATABASE = [
+            {
+                id: 'ubuntu',
+                name: 'Ubuntu',
+                tagline: 'El sistema operativo Linux más popular para uso general y servidores.',
+                description: 'Respaldado por Canonical, Ubuntu ofrece una experiencia de escritorio pulida y estable con excelente soporte de hardware e inmensa comunidad.',
+                base: 'Debian',
+                desktop: 'GNOME',
+                useCase: 'Daily',
+                updateModel: 'Fixed',
+                difficulty: 1,
+                ramMin: '2 GB',
+                ramVal: 2048,
+                cpuMin: 'Dual Core 2.0 GHz',
+                diskMin: '25 GB',
+                initSystem: 'systemd',
+                packageManager: 'apt / snap',
+                sha256Sample: 'b48227e85c189b8d28a3f5f3e9a4ddf19e48b8b0e7c5b61d2a1b9e0f3d4a5b6c',
+                website: 'https://ubuntu.com',
+                downloadUrl: 'https://ubuntu.com/download/desktop',
+                rating: 4.8,
+                popularRank: 1,
+                logoBg: 'from-orange-500 to-amber-600',
+                badges: ['Top Pick', 'Beginner Friendly', 'LTS Support']
+            },
+            {
+                id: 'mint',
+                name: 'Linux Mint',
+                tagline: 'Elegante, cómodo y súper intuitivo para usuarios provenientes de Windows.',
+                description: 'Linux Mint se enfoca en proporcionar un escritorio Cinnamon clásico con herramientas propias visuales para administrar controladores y actualizaciones.',
+                base: 'Ubuntu',
+                desktop: 'Cinnamon',
+                useCase: 'Daily',
+                updateModel: 'Fixed',
+                difficulty: 1,
+                ramMin: '2 GB',
+                ramVal: 2048,
+                cpuMin: '64-bit Dual Core',
+                diskMin: '20 GB',
+                initSystem: 'systemd',
+                packageManager: 'apt / flatpak',
+                sha256Sample: '2c9e47f8923a1b4d0012e84c98a3e7f6b5a1c2d3e4f5a6b7c8d9e0f1a2b3c4d5',
+                website: 'https://linuxmint.com',
+                downloadUrl: 'https://linuxmint.com/download.php',
+                rating: 4.9,
+                popularRank: 2,
+                logoBg: 'from-emerald-500 to-teal-700',
+                badges: ['Best for Windows Migrators', 'Ultra Stable']
+            },
+            {
+                id: 'debian',
+                name: 'Debian GNU/Linux',
+                tagline: 'El sistema operativo universal. Roca sólida para servidores y sistemas críticos.',
+                description: 'Debian es una de las distribuciones más antiguas e influyentes. Destaca por su estricta política de software libre y estabilidad legendaria.',
+                base: 'Debian',
+                desktop: 'GNOME',
+                useCase: 'Server',
+                updateModel: 'Fixed',
+                difficulty: 2,
+                ramMin: '1 GB',
+                ramVal: 1024,
+                cpuMin: '1.0 GHz',
+                diskMin: '10 GB',
+                initSystem: 'systemd',
+                packageManager: 'apt',
+                sha256Sample: '7f9e8a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f',
+                website: 'https://debian.org',
+                downloadUrl: 'https://www.debian.org/distrib/',
+                rating: 4.7,
+                popularRank: 3,
+                logoBg: 'from-rose-600 to-red-700',
+                badges: ['Rock Solid', 'Universal Base']
+            },
+            {
+                id: 'arch',
+                name: 'Arch Linux',
+                tagline: 'Manténlo simple. Construye tu sistema operativo totalmente a medida.',
+                description: 'Distribución rolling-release independiente orientada a usuarios experimentados que desean personalizar cada componente mediante su potente gestor pacman.',
+                base: 'Independent',
+                desktop: 'CLI/Custom',
+                useCase: 'Developer',
+                updateModel: 'Rolling',
+                difficulty: 5,
+                ramMin: '1 GB',
+                ramVal: 1024,
+                cpuMin: 'x86-64 compatible',
+                diskMin: '5 GB',
+                initSystem: 'systemd',
+                packageManager: 'pacman',
+                sha256Sample: 'e1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2',
+                website: 'https://archlinux.org',
+                downloadUrl: 'https://archlinux.org/download/',
+                rating: 4.9,
+                popularRank: 4,
+                logoBg: 'from-sky-500 to-blue-700',
+                badges: ['Rolling Release', 'AUR Access', 'Expert Choice']
+            },
+            {
+                id: 'fedora',
+                name: 'Fedora Workstation',
+                tagline: 'Innovación de vanguardia con las tecnologías más recientes del ecosistema Linux.',
+                description: 'Patrocinado por Red Hat, Fedora es la cuna de innovaciones como Wayland, PipeWire y Flatpak en un entorno GNOME puro y profesional.',
+                base: 'RHEL/Fedora',
+                desktop: 'GNOME',
+                useCase: 'Developer',
+                updateModel: 'Fixed',
+                difficulty: 2,
+                ramMin: '2 GB',
+                ramVal: 2048,
+                cpuMin: '2.0 GHz Dual Core',
+                diskMin: '20 GB',
+                initSystem: 'systemd',
+                packageManager: 'dnf / flatpak',
+                sha256Sample: '3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b',
+                website: 'https://fedoraproject.org',
+                downloadUrl: 'https://fedoraproject.org/workstation/download',
+                rating: 4.8,
+                popularRank: 5,
+                logoBg: 'from-blue-600 to-indigo-800',
+                badges: ['Red Hat Enterprise Base', 'Bleeding Edge']
+            },
+            {
+                id: 'popos',
+                name: 'Pop!_OS',
+                tagline: 'Diseñado por System76 para creadores de contenido, programadores y gamers.',
+                description: 'Basado en Ubuntu, incluye gestor de ventanas tiled, soporte inmediato para GPUs Nvidia/AMD y el nuevo entorno de escritorio acelerado COSMIC.',
+                base: 'Ubuntu',
+                desktop: 'COSMIC',
+                useCase: 'Gaming',
+                updateModel: 'Fixed',
+                difficulty: 1,
+                ramMin: '4 GB',
+                ramVal: 4096,
+                cpuMin: '64-bit Dual Core',
+                diskMin: '20 GB',
+                initSystem: 'systemd',
+                packageManager: 'apt / flatpak',
+                sha256Sample: '8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a',
+                website: 'https://pop.system76.com',
+                downloadUrl: 'https://pop.system76.com/',
+                rating: 4.8,
+                popularRank: 6,
+                logoBg: 'from-cyan-600 to-teal-700',
+                badges: ['Nvidia Out of Box', 'Gaming Ready', 'COSMIC DE']
+            },
+            {
+                id: 'manjaro',
+                name: 'Manjaro Linux',
+                tagline: 'El poder y velocidad de Arch Linux con la sencillez de un instalador visual.',
+                description: 'Facilita el acceso a Arch con paquetes testeados, gestor de kernels visual y compatibilidad completa con hardware moderno.',
+                base: 'Arch',
+                desktop: 'KDE Plasma',
+                useCase: 'Daily',
+                updateModel: 'Rolling',
+                difficulty: 2,
+                ramMin: '2 GB',
+                ramVal: 2048,
+                cpuMin: '1.0 GHz',
+                diskMin: '30 GB',
+                initSystem: 'systemd',
+                packageManager: 'pacman / pamac',
+                sha256Sample: '4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c',
+                website: 'https://manjaro.org',
+                downloadUrl: 'https://manjaro.org/download/',
+                rating: 4.6,
+                popularRank: 7,
+                logoBg: 'from-emerald-600 to-green-800',
+                badges: ['Arch Made Easy', 'Rolling Release']
+            },
+            {
+                id: 'zorin',
+                name: 'Zorin OS',
+                tagline: 'Diseñado visualmente para reemplazar Windows y macOS sin curva de aprendizaje.',
+                description: 'Ofrece layouts intercambiables que imitan Windows 11 o Mac, integración previa con WINE para ejecutar ejecutables .exe y máxima fluidez.',
+                base: 'Ubuntu',
+                desktop: 'GNOME',
+                useCase: 'Daily',
+                updateModel: 'Fixed',
+                difficulty: 1,
+                ramMin: '2 GB',
+                ramVal: 2048,
+                cpuMin: '1 GHz Dual Core',
+                diskMin: '15 GB',
+                initSystem: 'systemd',
+                packageManager: 'apt / flatpak',
+                sha256Sample: '5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d',
+                website: 'https://zorin.com/os',
+                downloadUrl: 'https://zorin.com/os/download/',
+                rating: 4.7,
+                popularRank: 8,
+                logoBg: 'from-sky-400 to-cyan-600',
+                badges: ['Windows Lookalike', 'User Friendly']
+            },
+            {
+                id: 'kali',
+                name: 'Kali Linux',
+                tagline: 'La plataforma estándar mundial para ciberseguridad y pruebas de penetración.',
+                description: 'Desarrollado por Offensive Security, viene preinstalado con más de 600 herramientas profesionales para auditoría de redes, forense y seguridad.',
+                base: 'Debian',
+                desktop: 'XFCE',
+                useCase: 'Security',
+                updateModel: 'Rolling',
+                difficulty: 3,
+                ramMin: '2 GB',
+                ramVal: 2048,
+                cpuMin: '1 GHz',
+                diskMin: '20 GB',
+                initSystem: 'systemd',
+                packageManager: 'apt',
+                sha256Sample: '6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e',
+                website: 'https://kali.org',
+                downloadUrl: 'https://www.kali.org/get-kali/',
+                rating: 4.8,
+                popularRank: 9,
+                logoBg: 'from-slate-700 to-indigo-900',
+                badges: ['Cybersecurity Standard', 'Pentesting Tools']
+            },
+            {
+                id: 'opensuse',
+                name: 'openSUSE Tumbleweed',
+                tagline: 'Rolling release ultra confiable respaldada por la herramienta de administración YaST.',
+                description: 'Tumbleweed ofrece actualizaciones continuas rigurosamente probadas mediante OpenQA y snapshots automáticos en sistema de archivos Btrfs.',
+                base: 'SUSE',
+                desktop: 'KDE Plasma',
+                useCase: 'Developer',
+                updateModel: 'Rolling',
+                difficulty: 3,
+                ramMin: '2 GB',
+                ramVal: 2048,
+                cpuMin: '2.0 GHz Dual Core',
+                diskMin: '20 GB',
+                initSystem: 'systemd',
+                packageManager: 'zypper',
+                sha256Sample: '7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f',
+                website: 'https://opensuse.org',
+                downloadUrl: 'https://get.opensuse.org/tumbleweed/',
+                rating: 4.7,
+                popularRank: 10,
+                logoBg: 'from-lime-600 to-emerald-700',
+                badges: ['Btrfs Snapshots', 'YaST Control Center']
+            },
+            {
+                id: 'endeavouros',
+                name: 'EndeavourOS',
+                tagline: 'Una experiencia Arch Linux centrada en la comunidad y soporte cercano.',
+                description: 'Distribución basada en Arch con un instalador Calamares ligero, mínima capa de personalización y una comunidad cálida en sus foros.',
+                base: 'Arch',
+                desktop: 'KDE Plasma',
+                useCase: 'Developer',
+                updateModel: 'Rolling',
+                difficulty: 3,
+                ramMin: '1.5 GB',
+                ramVal: 1536,
+                cpuMin: 'x86-64 64-bit',
+                diskMin: '15 GB',
+                initSystem: 'systemd',
+                packageManager: 'pacman',
+                sha256Sample: '8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a',
+                website: 'https://endeavouros.com',
+                downloadUrl: 'https://endeavouros.com/#Download',
+                rating: 4.8,
+                popularRank: 11,
+                logoBg: 'from-purple-600 to-pink-700',
+                badges: ['Purist Arch Base', 'Lightweight Installer']
+            },
+            {
+                id: 'nixos',
+                name: 'NixOS',
+                tagline: 'Gestión de configuración puramente funcional y reproducción exacta de sistema.',
+                description: 'Un enfoque revolucionario donde todo el estado del sistema operativo está definido en un archivo de configuración declarativo que permite rollbacks instantáneos.',
+                base: 'Independent',
+                desktop: 'GNOME',
+                useCase: 'Developer',
+                updateModel: 'Rolling',
+                difficulty: 5,
+                ramMin: '2 GB',
+                ramVal: 2048,
+                cpuMin: 'x86-64 Multi-core',
+                diskMin: '20 GB',
+                initSystem: 'systemd',
+                packageManager: 'nix',
+                sha256Sample: '9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b',
+                website: 'https://nixos.org',
+                downloadUrl: 'https://nixos.org/download.html',
+                rating: 4.9,
+                popularRank: 12,
+                logoBg: 'from-cyan-600 to-blue-800',
+                badges: ['Declarative Config', 'Atomic Rollbacks']
+            },
+            {
+                id: 'elementary',
+                name: 'elementary OS',
+                tagline: 'Un reemplazo rápido, abierto y respetuoso de la privacidad para Windows/macOS.',
+                description: 'Desarrollado con su propio entorno Pantheon, guía de diseño estricta, AppCenter con pagos éticos y enfoque en la simplicidad visual.',
+                base: 'Ubuntu',
+                desktop: 'Pantheon',
+                useCase: 'Daily',
+                updateModel: 'Fixed',
+                difficulty: 1,
+                ramMin: '4 GB',
+                ramVal: 4096,
+                cpuMin: 'Intel i3 o superior',
+                diskMin: '15 GB',
+                initSystem: 'systemd',
+                packageManager: 'apt / flatpak',
+                sha256Sample: '0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c',
+                website: 'https://elementary.io',
+                downloadUrl: 'https://elementary.io',
+                rating: 4.5,
+                popularRank: 13,
+                logoBg: 'from-blue-500 to-sky-600',
+                badges: ['Pantheon Desktop', 'Mac Aesthetic']
+            },
+            {
+                id: 'garuda',
+                name: 'Garuda Linux',
+                tagline: 'Distribución enfocada en el máximo rendimiento Gaming con estética Neón.',
+                description: 'Basado en Arch con Btrfs y compresión zstd de fábrica, optimización de CPU Zen kernel, drivers gráficos y un tema Dr460nized espectacular.',
+                base: 'Arch',
+                desktop: 'KDE Plasma',
+                useCase: 'Gaming',
+                updateModel: 'Rolling',
+                difficulty: 3,
+                ramMin: '4 GB',
+                ramVal: 4096,
+                cpuMin: 'Quad Core CPU',
+                diskMin: '30 GB',
+                initSystem: 'systemd',
+                packageManager: 'pacman',
+                sha256Sample: '1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d',
+                website: 'https://garudalinux.org',
+                downloadUrl: 'https://garudalinux.org/downloads',
+                rating: 4.7,
+                popularRank: 14,
+                logoBg: 'from-violet-600 to-fuchsia-800',
+                badges: ['Gaming Powerhouse', 'Zen Kernel']
+            },
+            {
+                id: 'tails',
+                name: 'Tails',
+                tagline: 'El sistema operativo amnésico e incógnito para preservar tu privacidad total.',
+                description: 'Diseñado para ejecutarse desde un pendrive USB. Fuerza todas las conexiones a través de la red Tor y borra toda huella de la RAM al apagar.',
+                base: 'Debian',
+                desktop: 'GNOME',
+                useCase: 'Security',
+                updateModel: 'Fixed',
+                difficulty: 2,
+                ramMin: '2 GB',
+                ramVal: 2048,
+                cpuMin: '64-bit Compatible',
+                diskMin: '8 GB USB',
+                initSystem: 'systemd',
+                packageManager: 'apt',
+                sha256Sample: '2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e',
+                website: 'https://tails.net',
+                downloadUrl: 'https://tails.net/install/index.en.html',
+                rating: 4.8,
+                popularRank: 15,
+                logoBg: 'from-purple-800 to-slate-900',
+                badges: ['Tor Network Native', 'Zero Footprint']
+            },
+            {
+                id: 'mxlinux',
+                name: 'MX Linux',
+                tagline: 'Eficiencia de recursos media con gran estabilidad y utilidades MX Tools.',
+                description: 'Basado en Debian estable, combina un escritorio XFCE ágil con potentes herramientas de configuración propia para clonación y personalización.',
+                base: 'Debian',
+                desktop: 'XFCE',
+                useCase: 'Lightweight',
+                updateModel: 'Fixed',
+                difficulty: 1,
+                ramMin: '1 GB',
+                ramVal: 1024,
+                cpuMin: 'Modern Dual Core',
+                diskMin: '10 GB',
+                initSystem: 'sysvinit/systemd',
+                packageManager: 'apt',
+                sha256Sample: '3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f',
+                website: 'https://mxlinux.org',
+                downloadUrl: 'https://mxlinux.org/download-links/',
+                rating: 4.8,
+                popularRank: 16,
+                logoBg: 'from-blue-700 to-slate-800',
+                badges: ['MX Tools', 'Low Memory Usage']
+            },
+            {
+                id: 'linuxlite',
+                name: 'Linux Lite',
+                tagline: 'Ultraligero, simple y perfecto para dar nueva vida a computadoras antiguas.',
+                description: 'Creado para facilitar la transición desde Windows 7/10 a ordenadores de escasos recursos con herramientas amigables.',
+                base: 'Ubuntu',
+                desktop: 'XFCE',
+                useCase: 'Lightweight',
+                updateModel: 'Fixed',
+                difficulty: 1,
+                ramMin: '768 MB',
+                ramVal: 768,
+                cpuMin: '1 GHz Processor',
+                diskMin: '8 GB',
+                initSystem: 'systemd',
+                packageManager: 'apt',
+                sha256Sample: '4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a',
+                website: 'https://linuxliteos.com',
+                downloadUrl: 'https://www.linuxliteos.com/download.php',
+                rating: 4.6,
+                popularRank: 17,
+                logoBg: 'from-yellow-600 to-amber-700',
+                badges: ['Old Hardware Savior', 'Lightweight']
+            },
+            {
+                id: 'alpine',
+                name: 'Alpine Linux',
+                tagline: 'Ultraligero orientado a la seguridad construido alrededor de musl libc y busybox.',
+                description: 'Elección estándar para contenedores Docker por su diminuto tamaño (~5MB en imagen base) e invocación mínima de recursos de procesador.',
+                base: 'Independent',
+                desktop: 'CLI/Custom',
+                useCase: 'Server',
+                updateModel: 'Rolling',
+                difficulty: 4,
+                ramMin: '128 MB',
+                ramVal: 128,
+                cpuMin: 'x86 or ARM',
+                diskMin: '1 GB',
+                initSystem: 'openrc',
+                packageManager: 'apk',
+                sha256Sample: '5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b',
+                website: 'https://alpinelinux.org',
+                downloadUrl: 'https://alpinelinux.org/downloads/',
+                rating: 4.7,
+                popularRank: 18,
+                logoBg: 'from-sky-700 to-slate-900',
+                badges: ['Docker Standard', 'Micro Footprint']
+            },
+            {
+                id: 'gentoo',
+                name: 'Gentoo Linux',
+                tagline: 'Compilación local completa para obtener la máxima optimización de tu hardware.',
+                description: 'Distribución avanzada basada en Portage donde cada paquete se compila desde el código fuente adaptado a las instrucciones exactas de tu procesador.',
+                base: 'Independent',
+                desktop: 'CLI/Custom',
+                useCase: 'Developer',
+                updateModel: 'Rolling',
+                difficulty: 5,
+                ramMin: '2 GB',
+                ramVal: 2048,
+                cpuMin: '64-bit Multi-core',
+                diskMin: '20 GB',
+                initSystem: 'OpenRC',
+                packageManager: 'emerge',
+                sha256Sample: '6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c',
+                website: 'https://gentoo.org',
+                downloadUrl: 'https://www.gentoo.org/downloads/',
+                rating: 4.8,
+                popularRank: 19,
+                logoBg: 'from-purple-700 to-indigo-900',
+                badges: ['Source Compilation', 'Ultimate Control']
+            },
+            {
+                id: 'void',
+                name: 'Void Linux',
+                tagline: 'Distribución independiente de arranque relámpago con Runit e XBPS.',
+                description: 'Construida desde cero sin systemd, Void ofrece un rendimiento sobresaliente, administración de servicios sencilla con runit y rápido gestor xbps.',
+                base: 'Independent',
+                desktop: 'XFCE',
+                useCase: 'Lightweight',
+                updateModel: 'Rolling',
+                difficulty: 4,
+                ramMin: '512 MB',
+                ramVal: 512,
+                cpuMin: 'x86-64 / ARM',
+                diskMin: '5 GB',
+                initSystem: 'runit',
+                packageManager: 'xbps',
+                sha256Sample: '7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d',
+                website: 'https://voidlinux.org',
+                downloadUrl: 'https://voidlinux.org/download/',
+                rating: 4.7,
+                popularRank: 20,
+                logoBg: 'from-emerald-700 to-teal-900',
+                badges: ['No Systemd', 'Runit Init']
+            },
+            {
+                id: 'solus',
+                name: 'Solus OS',
+                tagline: 'Un sistema operativo diseñado desde cero para computación de escritorio personal.',
+                description: 'Desarrollador del escritorio Budgie, Solus se enfoca en brindar una experiencia de uso diario fluida, drivers actualizados y enfoque en el usuario final.',
+                base: 'Independent',
+                desktop: 'Cinnamon',
+                useCase: 'Daily',
+                updateModel: 'Rolling',
+                difficulty: 2,
+                ramMin: '2 GB',
+                ramVal: 2048,
+                cpuMin: '64-bit Dual Core',
+                diskMin: '10 GB',
+                initSystem: 'systemd',
+                packageManager: 'eopkg',
+                sha256Sample: '8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e',
+                website: 'https://getsol.us',
+                downloadUrl: 'https://getsol.us/download/',
+                rating: 4.5,
+                popularRank: 21,
+                logoBg: 'from-cyan-700 to-slate-800',
+                badges: ['Budgie Creator', 'Desktop Focused']
+            },
+            {
+                id: 'nobara',
+                name: 'Nobara Linux',
+                tagline: 'Modificado por GloriousEggroll para la experiencia Gaming y de Streaming ideal.',
+                description: 'Basado en Fedora con parches personalizados del kernel, Proton-GE preinstalado, OBS Studio y arreglos gráficos para juegos AAA.',
+                base: 'RHEL/Fedora',
+                desktop: 'KDE Plasma',
+                useCase: 'Gaming',
+                updateModel: 'Fixed',
+                difficulty: 2,
+                ramMin: '4 GB',
+                ramVal: 4096,
+                cpuMin: '64-bit Multi-core',
+                diskMin: '30 GB',
+                initSystem: 'systemd',
+                packageManager: 'dnf',
+                sha256Sample: '9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f',
+                website: 'https://nobaraproject.org',
+                downloadUrl: 'https://nobaraproject.org/download-nobara/',
+                rating: 4.9,
+                popularRank: 22,
+                logoBg: 'from-amber-600 to-red-700',
+                badges: ['GE Proton Native', 'Ultimate Gaming']
+            },
+            {
+                id: 'rocky',
+                name: 'Rocky Linux',
+                tagline: 'Reemplazo empresarial 100% binario y compatible con Red Hat Enterprise Linux.',
+                description: 'Fundado por el cofundador de CentOS tras el cambio de CentOS Stream. Diseñado para servidores de misión crítica con estabilidad absoluta.',
+                base: 'RHEL/Fedora',
+                desktop: 'GNOME',
+                useCase: 'Server',
+                updateModel: 'Fixed',
+                difficulty: 3,
+                ramMin: '2 GB',
+                ramVal: 2048,
+                cpuMin: 'x86-64-v2',
+                diskMin: '20 GB',
+                initSystem: 'systemd',
+                packageManager: 'dnf',
+                sha256Sample: '0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a',
+                website: 'https://rockylinux.org',
+                downloadUrl: 'https://rockylinux.org/download',
+                rating: 4.8,
+                popularRank: 23,
+                logoBg: 'from-emerald-800 to-slate-900',
+                badges: ['RHEL Binary Compatible', 'Enterprise Grade']
+            },
+            {
+                id: 'bodhi',
+                name: 'Bodhi Linux',
+                tagline: 'Diseño minimalista alimentado por el escritorio ligero Moksha.',
+                description: 'Basado en Ubuntu LTS pero liberado de software pesado. Utiliza la bifurcación del entorno Enlightenment para funcionar como un rayo.',
+                base: 'Ubuntu',
+                desktop: 'CLI/Custom',
+                useCase: 'Lightweight',
+                updateModel: 'Fixed',
+                difficulty: 1,
+                ramMin: '512 MB',
+                ramVal: 512,
+                cpuMin: '500 MHz Processor',
+                diskMin: '5 GB',
+                initSystem: 'systemd',
+                packageManager: 'apt',
+                sha256Sample: '1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b',
+                website: 'https://bodhilinux.com',
+                downloadUrl: 'https://www.bodhilinux.com/download/',
+                rating: 4.4,
+                popularRank: 24,
+                logoBg: 'from-green-600 to-lime-800',
+                badges: ['Moksha Desktop', 'Ultralight Ubuntu']
+            },
+            {
+                id: 'puppy',
+                name: 'Puppy Linux',
+                tagline: 'Extraordinariamente pequeño y rápido. Se carga por completo dentro de la RAM.',
+                description: 'Colección de distribuciones que pesan menos de 400 MB. Se cargan totalmente en memoria RAM permitiendo retirar el USB de arranque tras iniciar.',
+                base: 'Debian',
+                desktop: 'CLI/Custom',
+                useCase: 'Lightweight',
+                updateModel: 'Fixed',
+                difficulty: 1,
+                ramMin: '512 MB',
+                ramVal: 512,
+                cpuMin: '1.0 GHz',
+                diskMin: '1 GB',
+                initSystem: 'custom',
+                packageManager: 'pkg / apt',
+                sha256Sample: '2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c',
+                website: 'https://puppylinux-woof-ce.github.io',
+                downloadUrl: 'https://puppylinux-woof-ce.github.io/',
+                rating: 4.5,
+                popularRank: 25,
+                logoBg: 'from-amber-700 to-yellow-900',
+                badges: ['Runs Entirely in RAM', 'Portable']
+            }
+        ];
+
+        /* BIOS KEY MATRIX DATABASE */
+        const BIOS_DATABASE = [
+            { brand: 'ASUS', bootMenu: 'F8 / Esc', biosKey: 'F2 / Del', notes: 'En portátiles la combinación habitual es F2 o Fn+F2 al encender.' },
+            { brand: 'Acer', bootMenu: 'F12', biosKey: 'F2 / Del', notes: 'F12 requiere estar activado en la BIOS previamente en algunos modelos.' },
+            { brand: 'Dell', bootMenu: 'F12', biosKey: 'F2', notes: 'Soporte excelente de menú de arranque directo al presionar F12 en el logo.' },
+            { brand: 'HP / Compaq', bootMenu: 'F9 / Esc', biosKey: 'F10 / Esc', notes: 'Presionar Esc al encender abre el menú de inicio rápido general.' },
+            { brand: 'Lenovo', bootMenu: 'F12 / Fn+F12', biosKey: 'F2 / Fn+F2', notes: 'Muchos portátiles poseen el botón dedicado NOVO junto a la clavija.' },
+            { brand: 'MSI', bootMenu: 'F11', biosKey: 'Del', notes: 'Del entra a la BIOS UEFI, F11 al selector de dispositivos USB/SSD.' },
+            { brand: 'Gigabyte', bootMenu: 'F12', biosKey: 'Del', notes: 'Muy directo en placas madre de escritorio.' },
+            { brand: 'Samsung', bootMenu: 'F10 / Esc', biosKey: 'F2', notes: 'Desactivar Fast Boot en Windows para permitir detección rápida.' },
+            { brand: 'Toshiba / Dynabook', bootMenu: 'F12', biosKey: 'F2', notes: 'Mantener presionado F12 al encender el equipo.' },
+            { brand: 'Microsoft Surface', bootMenu: 'Vol - y Encendido', biosKey: 'Vol + y Encendido', notes: 'Mantener botón de volumen presionado y pulsar encendido.' }
+        ];
+
+        /* TUX INTERACTIVE QUOTES */
+        const TUX_QUOTES = [
+            "¡Hola! Soy Tux. Si vienes de Windows, te recomiendo Linux Mint o Zorin OS.",
+            "¿Sabías que Linux está presente en el 100% de las 500 supercomputadoras más potentes del mundo?",
+            "Usa la pestaña 'Distro Finder' si no estás seguro de cuál elegir.",
+            "Recuerda siempre verificar la firma SHA-256 de tu ISO antes de flashearla.",
+            "Con Ventoy puedes copiar varias ISOs a un solo USB sin formatear repetidamente.",
+            "¡El Kernel de Linux fue creado por Linus Torvalds en 1991 y sigue creciendo!"
+        ];
+        let tuxQuoteIdx = 0;
+
+        function talkTux() {
+            playSound('click');
+            const bubble = document.getElementById('tux-speech-text');
+            if (bubble) {
+                tuxQuoteIdx = (tuxQuoteIdx + 1) % TUX_QUOTES.length;
+                bubble.innerText = TUX_QUOTES[tuxQuoteIdx];
+            }
+        }
+
+        /* Global Application State */
+        let state = {
+            activeTab: 'home',
+            theme: 'obsidian',
+            accent: 'emerald',
+            font: 'Inter',
+            soundEnabled: true,
+            compareList: [],
+            wizardAnswers: { exp: null, use: null, ram: null }
+        };
+
+        /* WEB AUDIO API SYNTHESIZER ENGINE */
+        let audioCtx = null;
+
+        function playSound(type) {
+            if (!state.soundEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+                if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(600, now);
+                    osc.frequency.exponentialRampToValueAtTime(300, now + 0.05);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                    osc.start(now);
+                    osc.stop(now + 0.05);
+                } else if (type === 'tab') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(400, now);
+                    osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                } else if (type === 'success') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.08);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+                    osc.start(now);
+                    osc.stop(now + 0.2);
+                }
+            } catch(e) { console.warn('Audio not initialized', e); }
+        }
+
+        /* DYNAMIC THEME-SPECIFIC ANIMATION SWITCHER */
+        function switchTab(tabId) {
+            if (state.activeTab === tabId) return;
+            playSound('tab');
+
+            // Hide previous section
+            const prevSection = document.getElementById(`section-${state.activeTab}`);
+            if (prevSection) prevSection.classList.add('hidden');
+
+            // Update Nav Button Styles
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-brand-500', 'bg-brand-500/10');
+            });
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) activeNav.classList.add('text-brand-500', 'bg-brand-500/10');
+
+            // Show new target section
+            const newSection = document.getElementById(`section-${tabId}`);
+            if (newSection) {
+                newSection.classList.remove('hidden');
+
+                const animMap = {
+                    'obsidian': 'anim-fade-slide-up',
+                    'light': 'anim-soft-scale-fade',
+                    'aero': 'anim-aero-float-ripple',
+                    'cyberpunk': 'anim-cyber-glitch-in',
+                    'nord': 'anim-nord-arctic-slide'
+                };
+
+                // Clear all theme animations
+                Object.values(animMap).forEach(cls => newSection.classList.remove(cls));
+
+                // Force reflow
+                void newSection.offsetWidth;
+
+                // Add animation corresponding to the ACTIVE theme
+                const activeTheme = document.documentElement.getAttribute('data-theme') || 'obsidian';
+                const animClass = animMap[activeTheme] || 'anim-fade-slide-up';
+                newSection.classList.add(animClass);
+            }
+
+            state.activeTab = tabId;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* APPEARANCE CUSTOMIZATION FUNCTIONS */
+        function setTheme(themeName) {
+            playSound('click');
+            state.theme = themeName;
+            document.documentElement.setAttribute('data-theme', themeName);
+            
+            if (themeName === 'light') {
+                document.documentElement.classList.remove('dark');
+            } else {
+                document.documentElement.classList.add('dark');
+            }
+        }
+
+        function setAccent(accentName) {
+            playSound('click');
+            state.accent = accentName;
+            document.documentElement.setAttribute('data-accent', accentName);
+        }
+
+        function setFontFamily(fontName) {
+            playSound('click');
+            state.font = fontName;
+            document.documentElement.style.setProperty('--current-font', fontName);
+        }
+
+        function toggleSound(enabled) {
+            state.soundEnabled = enabled;
+            if (enabled) playSound('click');
+        }
+
+        function toggleSettingsDrawer() {
+            playSound('click');
+            const drawer = document.getElementById('settings-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function toggleMobileMenu() {
+            playSound('click');
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        /* FEATURED DISTROS RENDER */
+        function renderFeaturedDistros() {
+            const container = document.getElementById('featured-distro-grid');
+            if (!container) return;
+
+            const featured = DISTRO_DATABASE.slice(0, 3);
+            container.innerHTML = featured.map(d => `
+                <div class="theme-card p-6 rounded-2xl flex flex-col justify-between space-y-4 border border-brand-500/20">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br ${d.logoBg} flex items-center justify-center text-white font-bold text-lg shadow-md">
+                                ${d.name.charAt(0)}
+                            </div>
+                            <span class="text-xs font-mono font-bold text-brand-500"><i class="fa-solid fa-star text-amber-400"></i> ${d.rating}</span>
+                        </div>
+                        <h3 class="text-xl font-bold">${d.name}</h3>
+                        <p class="text-xs opacity-75 line-clamp-2">${d.tagline}</p>
+                        <div class="flex flex-wrap gap-1.5 pt-1">
+                            ${d.badges.map(b => `<span class="px-2 py-0.5 rounded-md bg-brand-500/10 text-brand-500 text-[10px] font-semibold">${b}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 flex items-center justify-between gap-2">
+                        <button onclick="openDetailModal('${d.id}')" class="px-3 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-xs font-semibold flex-1 transition-all">
+                            Detalles
+                        </button>
+                        <a href="${d.downloadUrl}" target="_blank" class="px-3 py-2 rounded-lg bg-brand-500 text-white text-xs font-semibold flex-1 text-center hover:bg-brand-600 transition-all">
+                            Descargar
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /* CATALOG FILTER & CARD RENDERING ENGINE */
+        function applyCatalogFilters() {
+            const search = document.getElementById('filter-search').value.toLowerCase();
+            const base = document.getElementById('filter-base').value;
+            const desktop = document.getElementById('filter-desktop').value;
+            const usecase = document.getElementById('filter-usecase').value;
+            const maxRam = document.getElementById('filter-ram').value;
+            const updateModel = document.getElementById('filter-update').value;
+            const sortBy = document.getElementById('filter-sort').value;
+
+            let filtered = DISTRO_DATABASE.filter(d => {
+                const matchesSearch = d.name.toLowerCase().includes(search) || 
+                                      d.tagline.toLowerCase().includes(search) || 
+                                      d.packageManager.toLowerCase().includes(search) ||
+                                      d.badges.some(b => b.toLowerCase().includes(search));
+                
+                const matchesBase = base === 'all' || d.base === base;
+                const matchesDesktop = desktop === 'all' || d.desktop === desktop;
+                const matchesUseCase = usecase === 'all' || d.useCase === usecase;
+                const matchesRam = maxRam === 'all' || d.ramVal <= parseInt(maxRam);
+                const matchesUpdate = updateModel === 'all' || d.updateModel === updateModel;
+
+                return matchesSearch && matchesBase && matchesDesktop && matchesUseCase && matchesRam && matchesUpdate;
+            });
+
+            // Sort
+            if (sortBy === 'popular') filtered.sort((a, b) => a.popularRank - b.popularRank);
+            else if (sortBy === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+            else if (sortBy === 'name') filtered.sort((a, b) => a.name.localeCompare(b.name));
+            else if (sortBy === 'difficulty-asc') filtered.sort((a, b) => a.difficulty - b.difficulty);
+            else if (sortBy === 'difficulty-desc') filtered.sort((a, b) => b.difficulty - a.difficulty);
+
+            // Update badge count
+            const countBadge = document.getElementById('distro-count-badge');
+            if (countBadge) countBadge.innerText = filtered.length;
+
+            // Render cards
+            const container = document.getElementById('catalog-grid');
+            if (!container) return;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 space-y-3 theme-card rounded-2xl">
+                        <i class="fa-solid fa-ghost text-4xl text-gray-500"></i>
+                        <h3 class="text-lg font-bold">No se encontraron distribuciones</h3>
+                        <p class="text-xs opacity-75">Intenta ajustar los criterios de búsqueda o filtros.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(d => {
+                const isCompared = state.compareList.includes(d.id);
+                return `
+                    <div class="theme-card p-6 rounded-2xl flex flex-col justify-between space-y-4 relative border border-gray-800 hover:border-brand-500/50">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br ${d.logoBg} flex items-center justify-center text-white font-bold text-lg shadow-md">
+                                        ${d.name.charAt(0)}
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-base leading-snug">${d.name}</h3>
+                                        <div class="text-[11px] font-mono opacity-60">Base: ${d.base}</div>
+                                    </div>
+                                </div>
+                                <button onclick="toggleCompare('${d.id}')" class="p-1.5 rounded-lg border ${isCompared ? 'bg-brand-500 text-white border-brand-500' : 'border-gray-700 hover:border-brand-500 opacity-75'} transition-all text-xs" title="Añadir a Comparativa">
+                                    <i class="fa-solid fa-scale-balanced"></i>
+                                </button>
+                            </div>
+
+                            <p class="text-xs opacity-80 leading-relaxed line-clamp-2">${d.tagline}</p>
+
+                            <!-- Specs Pill Tags -->
+                            <div class="grid grid-cols-2 gap-2 text-[11px] font-mono opacity-80 pt-1">
+                                <div class="bg-gray-900/40 p-1.5 rounded-lg border border-gray-800/80"><i class="fa-solid fa-desktop text-brand-500 mr-1"></i> ${d.desktop}</div>
+                                <div class="bg-gray-900/40 p-1.5 rounded-lg border border-gray-800/80"><i class="fa-solid fa-memory text-brand-500 mr-1"></i> ${d.ramMin}</div>
+                                <div class="bg-gray-900/40 p-1.5 rounded-lg border border-gray-800/80"><i class="fa-solid fa-box text-brand-500 mr-1"></i> ${d.packageManager}</div>
+                                <div class="bg-gray-900/40 p-1.5 rounded-lg border border-gray-800/80"><i class="fa-solid fa-arrows-rotate text-brand-500 mr-1"></i> ${d.updateModel}</div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-800 flex items-center gap-2">
+                            <button onclick="openDetailModal('${d.id}')" class="px-3 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-xs font-semibold flex-1 transition-all">
+                                Detalle Técnico
+                            </button>
+                            <a href="${d.downloadUrl}" target="_blank" class="px-3 py-2 rounded-xl bg-brand-500 text-white text-xs font-semibold flex-1 text-center hover:bg-brand-600 transition-all">
+                                ISO Oficial
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        /* DETAIL MODAL ENGINE */
+        function openDetailModal(id) {
+            playSound('click');
+            const d = DISTRO_DATABASE.find(item => item.id === id);
+            if (!d) return;
+
+            const modal = document.getElementById('detail-modal');
+            const content = document.getElementById('detail-modal-content');
+
+            content.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br ${d.logoBg} flex items-center justify-center text-white font-extrabold text-2xl shadow-xl">
+                            ${d.name.charAt(0)}
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold">${d.name}</h2>
+                            <p class="text-xs text-brand-500 font-mono font-bold">${d.tagline}</p>
+                        </div>
+                    </div>
+
+                    <p class="text-sm opacity-80 leading-relaxed">${d.description}</p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-xs">
+                        <div class="p-3 rounded-xl bg-gray-900/50 border border-gray-800">
+                            <div class="opacity-50 text-[10px]">BASE MADRE</div>
+                            <div class="font-bold text-brand-500 mt-0.5">${d.base}</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-gray-900/50 border border-gray-800">
+                            <div class="opacity-50 text-[10px]">ESCRITORIO</div>
+                            <div class="font-bold text-brand-500 mt-0.5">${d.desktop}</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-gray-900/50 border border-gray-800">
+                            <div class="opacity-50 text-[10px]">GESTOR PAQUETES</div>
+                            <div class="font-bold text-brand-500 mt-0.5">${d.packageManager}</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-gray-900/50 border border-gray-800">
+                            <div class="opacity-50 text-[10px]">RAM MÍNIMA</div>
+                            <div class="font-bold text-brand-500 mt-0.5">${d.ramMin}</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-gray-900/50 border border-gray-800">
+                            <div class="opacity-50 text-[10px]">INIT SYSTEM</div>
+                            <div class="font-bold text-brand-500 mt-0.5">${d.initSystem}</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-gray-900/50 border border-gray-800">
+                            <div class="opacity-50 text-[10px]">DISCO REQUERIDO</div>
+                            <div class="font-bold text-brand-500 mt-0.5">${d.diskMin}</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="text-xs font-bold uppercase tracking-wider opacity-75">Suma de Verificación SHA-256 de Ejemplo:</div>
+                        <div class="p-2.5 rounded-xl bg-gray-900 border border-gray-800 font-mono text-[11px] text-brand-500 break-all">
+                            ${d.sha256Sample}
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="${d.downloadUrl}" target="_blank" class="flex-1 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-center font-semibold text-xs transition-all">
+                            <i class="fa-solid fa-download"></i> Descargar ISO Oficial
+                        </a>
+                        <a href="${d.website}" target="_blank" class="px-4 py-3 rounded-xl theme-card hover:border-brand-500 text-center font-semibold text-xs transition-all">
+                            Sitio Web
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeDetailModal() {
+            playSound('click');
+            document.getElementById('detail-modal').classList.add('hidden');
+        }
+
+        /* COMPARATOR DOCK & MODAL ENGINE */
+        function toggleCompare(id) {
+            playSound('click');
+            const index = state.compareList.indexOf(id);
+            if (index > -1) {
+                state.compareList.splice(index, 1);
+            } else {
+                if (state.compareList.length >= 3) {
+                    alert('Puedes comparar un máximo de 3 distribuciones simultáneamente.');
+                    return;
+                }
+                state.compareList.push(id);
+            }
+            updateCompareBadge();
+            applyCatalogFilters();
+        }
+
+        function updateCompareBadge() {
+            const badge = document.getElementById('compare-badge');
+            if (badge) badge.innerText = state.compareList.length;
+        }
+
+        function openCompareModal() {
+            playSound('click');
+            if (state.compareList.length === 0) {
+                alert('Selecciona al menos una distribución en el catálogo para comparar.');
+                return;
+            }
+
+            const modal = document.getElementById('compare-modal');
+            const content = document.getElementById('compare-modal-content');
+
+            const distros = state.compareList.map(id => DISTRO_DATABASE.find(d => d.id === id));
+
+            content.innerHTML = `
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="border-b border-gray-800">
+                            <th class="p-3 font-mono opacity-60 uppercase">Característica</th>
+                            ${distros.map(d => `
+                                <th class="p-3">
+                                    <div class="font-bold text-sm text-brand-500">${d.name}</div>
+                                    <div class="text-[10px] opacity-60 font-mono">${d.desktop}</div>
+                                </th>
+                            `).join('')}
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-800/60 font-mono">
+                        <tr>
+                            <td class="p-3 font-bold opacity-75">Base Madre</td>
+                            ${distros.map(d => `<td class="p-3">${d.base}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold opacity-75">RAM Mínima</td>
+                            ${distros.map(d => `<td class="p-3">${d.ramMin}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold opacity-75">Gestor Paquetes</td>
+                            ${distros.map(d => `<td class="p-3">${d.packageManager}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold opacity-75">Modelo Actualización</td>
+                            ${distros.map(d => `<td class="p-3">${d.updateModel}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold opacity-75">Init System</td>
+                            ${distros.map(d => `<td class="p-3">${d.initSystem}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold opacity-75">Dificultad (1-5)</td>
+                            ${distros.map(d => `<td class="p-3"><span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-500 font-bold">${d.difficulty}/5</span></td>`).join('')}
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeCompareModal() {
+            playSound('click');
+            document.getElementById('compare-modal').classList.add('hidden');
+        }
+
+        /* DISTRO FINDER WIZARD STEP ENGINE */
+        function selectWizardOption(stepType, value) {
+            playSound('click');
+            state.wizardAnswers[stepType] = value;
+
+            if (stepType === 'exp') {
+                document.getElementById('wizard-step-1').classList.add('hidden');
+                document.getElementById('wizard-step-2').classList.remove('hidden');
+                document.getElementById('wizard-step-badge').innerText = 'Paso 2 de 3';
+                document.getElementById('dot-2').classList.replace('bg-gray-700', 'bg-brand-500');
+            } else if (stepType === 'use') {
+                document.getElementById('wizard-step-2').classList.add('hidden');
+                document.getElementById('wizard-step-3').classList.remove('hidden');
+                document.getElementById('wizard-step-badge').innerText = 'Paso 3 de 3';
+                document.getElementById('dot-3').classList.replace('bg-gray-700', 'bg-brand-500');
+            } else if (stepType === 'ram') {
+                document.getElementById('wizard-step-3').classList.add('hidden');
+                calculateWizardResults();
+            }
+        }
+
+        function calculateWizardResults() {
+            playSound('success');
+            const { exp, use, ram } = state.wizardAnswers;
+
+            let matches = DISTRO_DATABASE.filter(d => {
+                const matchRam = d.ramVal <= ram;
+                const matchUse = use === 'Daily' || d.useCase === use;
+                return matchRam && matchUse;
+            });
+
+            if (matches.length === 0) matches = DISTRO_DATABASE.slice(0, 3);
+
+            const container = document.getElementById('wizard-distro-list');
+            container.innerHTML = matches.slice(0, 3).map(d => `
+                <div class="theme-card p-5 rounded-2xl flex items-center justify-between gap-4 border border-brand-500/30">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br ${d.logoBg} flex items-center justify-center text-white font-bold text-xl">
+                            ${d.name.charAt(0)}
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-base">${d.name}</h3>
+                            <p class="text-xs opacity-75">${d.tagline}</p>
+                        </div>
+                    </div>
+                    <a href="${d.downloadUrl}" target="_blank" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-semibold whitespace-nowrap">
+                        Descargar
+                    </a>
+                </div>
+            `).join('');
+
+            document.getElementById('wizard-results').classList.remove('hidden');
+        }
+
+        function resetWizard() {
+            playSound('click');
+            state.wizardAnswers = { exp: null, use: null, ram: null };
+            document.getElementById('wizard-results').classList.add('hidden');
+            document.getElementById('wizard-step-1').classList.remove('hidden');
+            document.getElementById('wizard-step-badge').innerText = 'Paso 1 de 3';
+            document.getElementById('dot-2').classList.replace('bg-brand-500', 'bg-gray-700');
+            document.getElementById('dot-3').classList.replace('bg-brand-500', 'bg-gray-700');
+        }
+
+        /* USB BOOTABLE GUIDE DYNAMIC GENERATOR */
+        function setUsbTool(tool) {
+            playSound('click');
+            document.querySelectorAll('.usb-tool-btn').forEach(b => {
+                b.classList.remove('bg-brand-500', 'text-white');
+                b.classList.add('theme-card');
+            });
+            const activeBtn = document.getElementById(`tool-btn-${tool}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-brand-500', 'text-white');
+                activeBtn.classList.remove('theme-card');
+            }
+
+            const content = document.getElementById('usb-tool-content');
+            if (tool === 'ventoy') {
+                content.innerHTML = `
+                    <h3 class="text-xl font-bold text-brand-500 flex items-center gap-2">
+                        <i class="fa-solid fa-box-archive"></i> Ventoy (El método más moderno y recomendado)
+                    </h3>
+                    <p class="text-xs opacity-80 leading-relaxed">
+                        Ventoy te permite instalar una sola vez la herramienta en tu USB y luego simplemente copiar y pegar archivos .ISO directamente como si fuese un pendrive normal.
+                    </p>
+                    <ol class="list-decimal list-inside space-y-2 text-xs opacity-90 font-mono">
+                        <li>Descarga Ventoy desde su web oficial (ventoy.net) e inserta tu memoria USB.</li>
+                        <li>Ejecuta <code class="bg-gray-800 px-1 rounded text-brand-500">Ventoy2Disk.exe</code> y haz clic en <strong>Install</strong>.</li>
+                        <li>Copia los archivos .ISO que quieras directamente al pendrive.</li>
+                        <li>¡Listo! Reinicia tu PC y selecciona el USB en el Boot Menu.</li>
+                    </ol>
+                `;
+            } else if (tool === 'rufus') {
+                content.innerHTML = `
+                    <h3 class="text-xl font-bold text-brand-500 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> Rufus (Estándar en Windows)
+                    </h3>
+                    <p class="text-xs opacity-80 leading-relaxed">
+                        Rufus es la utilidad portable por excelencia para flashear imágenes ISO y omitir requerimientos de hardware.
+                    </p>
+                    <ol class="list-decimal list-inside space-y-2 text-xs opacity-90 font-mono">
+                        <li>Descarga Rufus de rufus.ie y selecciona tu dispositivo USB en "Dispositivo".</li>
+                        <li>Haz clic en "Seleccionar" y escoge la imagen ISO de Linux o Windows.</li>
+                        <li>Elige esquema de partición <strong>GPT</strong> para equipos UEFI modernos.</li>
+                        <li>Presiona "Empezar" y espera a que complete el formateo.</li>
+                    </ol>
+                `;
+            } else if (tool === 'etcher') {
+                content.innerHTML = `
+                    <h3 class="text-xl font-bold text-brand-500 flex items-center gap-2">
+                        <i class="fa-solid fa-compact-disc"></i> balenaEtcher (Multiplataforma)
+                    </h3>
+                    <p class="text-xs opacity-80 leading-relaxed">
+                        Herramienta visual intuitiva con validación automática de datos disponible para Windows, macOS y Linux.
+                    </p>
+                    <ol class="list-decimal list-inside space-y-2 text-xs opacity-90 font-mono">
+                        <li>Abre balenaEtcher y haz clic en <strong>Flash from file</strong>.</li>
+                        <li>Selecciona tu pendrive USB en <strong>Select target</strong>.</li>
+                        <li>Haz clic en <strong>Flash!</strong> y autentica con permisos de administrador.</li>
+                    </ol>
+                `;
+            } else if (tool === 'dd') {
+                content.innerHTML = `
+                    <h3 class="text-xl font-bold text-brand-500 flex items-center gap-2">
+                        <i class="fa-solid fa-terminal"></i> Comando Terminal \`dd\` (Avanzado)
+                    </h3>
+                    <p class="text-xs opacity-80 leading-relaxed">
+                        Flasheo de bajo nivel directo a bloques desde la consola en distribuciones Linux o macOS.
+                    </p>
+                    <div class="p-3 rounded-xl bg-gray-900 font-mono text-xs text-brand-500 border border-gray-800">
+                        sudo dd bs=4M if=distro.iso of=/dev/sdX status=progress conv=fdatasync
+                    </div>
+                `;
+            }
+        }
+
+        /* BIOS MATRIX POPULATE & FILTER */
+        function populateBiosMatrix(filter = '') {
+            const tbody = document.getElementById('bios-matrix-body');
+            if (!tbody) return;
+
+            const filtered = BIOS_DATABASE.filter(item => 
+                item.brand.toLowerCase().includes(filter.toLowerCase()) ||
+                item.bootMenu.toLowerCase().includes(filter.toLowerCase())
+            );
+
+            tbody.innerHTML = filtered.map(item => `
+                <tr class="hover:bg-gray-800/40 transition-colors">
+                    <td class="p-3 font-bold">${item.brand}</td>
+                    <td class="p-3 font-mono text-brand-500 font-bold">${item.bootMenu}</td>
+                    <td class="p-3 font-mono text-amber-400 font-bold">${item.biosKey}</td>
+                    <td class="p-3 opacity-75">${item.notes}</td>
+                </tr>
+            `).join('');
+        }
+
+        function filterBiosKeys() {
+            const query = document.getElementById('bios-search').value;
+            populateBiosMatrix(query);
+        }
+
+        /* WEB CRYPTO API LOCAL SHA-256 HASH CALCULATOR */
+        async function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            playSound('click');
+
+            document.getElementById('hash-progress-container').classList.remove('hidden');
+            document.getElementById('hash-filename').innerText = file.name;
+
+            const progressBar = document.getElementById('hash-progress-bar');
+            const progressText = document.getElementById('hash-percentage');
+            const calculatedInput = document.getElementById('calculated-hash');
+
+            calculatedInput.value = 'Calculando suma SHA-256...';
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                progressBar.style.width = '100%';
+                progressText.innerText = '100%';
+
+                const hashBuffer = await crypto.subcrypto ? crypto.subcrypto.digest('SHA-256', arrayBuffer) : crypto.subtle.digest('SHA-256', arrayBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+                calculatedInput.value = hashHex;
+                playSound('success');
+                compareHashes();
+            } catch (err) {
+                calculatedInput.value = 'Error al calcular Hash: ' + err.message;
+            }
+        }
+
+        function compareHashes() {
+            const calc = document.getElementById('calculated-hash').value.trim().toLowerCase();
+            const expected = document.getElementById('expected-hash').value.trim().toLowerCase();
+            const statusBox = document.getElementById('hash-match-status');
+
+            if (!calc || calc.startsWith('Esperando') || calc.startsWith('Calculando')) {
+                statusBox.classList.add('hidden');
+                return;
+            }
+
+            if (!expected) {
+                statusBox.classList.add('hidden');
+                return;
+            }
+
+            statusBox.classList.remove('hidden');
+
+            if (calc === expected) {
+                statusBox.className = 'p-4 rounded-xl text-xs font-semibold flex items-center gap-3 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
+                statusBox.innerHTML = '<i class="fa-solid fa-circle-check text-xl"></i> <div>¡El Hash coincide a la perfección! La imagen ISO es verídica e íntegra.</div>';
+            } else {
+                statusBox.className = 'p-4 rounded-xl text-xs font-semibold flex items-center gap-3 bg-rose-500/20 text-rose-400 border border-rose-500/40';
+                statusBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-xl"></i> <div>¡Atención! El Hash no coincide. El archivo podría estar corrupto o incompleto.</div>';
+            }
+        }
+
+        function copyCalculatedHash() {
+            playSound('click');
+            const hash = document.getElementById('calculated-hash').value;
+            if (hash && !hash.startsWith('Esperando')) {
+                navigator.clipboard.writeText(hash);
+                alert('¡SHA-256 copiado al portapapeles!');
+            }
+        }
+
+        /* INITIALIZATION ON DOM LOADED */
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFeaturedDistros();
+            applyCatalogFilters();
+            setUsbTool('ventoy');
+            populateBiosMatrix();
+        });
+    </script>
+</body>
+</html>
